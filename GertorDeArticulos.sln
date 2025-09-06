@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GertorDeArticulosTp1Progra3", "GertorDeArticulosTp1Progra3\GertorDeArticulosTp1Progra3.csproj", "{11B345C4-34E4-4100-BECC-E33BE594463E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11B345C4-34E4-4100-BECC-E33BE594463E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B345C4-34E4-4100-BECC-E33BE594463E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B345C4-34E4-4100-BECC-E33BE594463E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B345C4-34E4-4100-BECC-E33BE594463E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CABFE9F0-00C1-457E-AC70-56660A0F984B}
+	EndGlobalSection
+EndGlobal
