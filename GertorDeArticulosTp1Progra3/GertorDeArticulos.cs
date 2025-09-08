@@ -1,4 +1,5 @@
-﻿using System;
+﻿using service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,12 @@ namespace GertorDeArticulosTp1Progra3
         public GertorDeArticulos()
         {
             InitializeComponent();
+        }
+
+        private void GertorDeArticulos_Load(object sender, EventArgs e)
+        {
+            ArticuloService service = new ArticuloService();
+            dgvTablaArticulos.DataSource = service.listar();
         }
     }
 }

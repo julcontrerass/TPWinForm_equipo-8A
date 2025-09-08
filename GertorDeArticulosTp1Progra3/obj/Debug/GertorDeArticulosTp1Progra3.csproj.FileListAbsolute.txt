@@ -1,0 +1,15 @@
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\bin\Debug\GertorDeArticulosTp1Progra3.exe.config
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\bin\Debug\GertorDeArticulosTp1Progra3.exe
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\bin\Debug\GertorDeArticulosTp1Progra3.pdb
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\bin\Debug\dominio.dll
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\bin\Debug\service.dll
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\bin\Debug\dominio.pdb
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\bin\Debug\service.pdb
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\obj\Debug\GertorDeArticulosTp1Progra3.csproj.AssemblyReference.cache
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\obj\Debug\GertorDeArticulosTp1Progra3.GertorDeArticulos.resources
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\obj\Debug\GertorDeArticulosTp1Progra3.Properties.Resources.resources
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\obj\Debug\GertorDeArticulosTp1Progra3.csproj.GenerateResource.cache
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\obj\Debug\GertorDeArticulosTp1Progra3.csproj.CoreCompileInputs.cache
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\obj\Debug\GertorDe.F3FF8141.Up2Date
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\obj\Debug\GertorDeArticulosTp1Progra3.exe
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\obj\Debug\GertorDeArticulosTp1Progra3.pdb

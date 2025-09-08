@@ -1,0 +1,9 @@
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\service\bin\Debug\service.dll
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\service\bin\Debug\service.pdb
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\service\bin\Debug\dominio.dll
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\service\bin\Debug\dominio.pdb
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\service\obj\Debug\service.csproj.AssemblyReference.cache
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\service\obj\Debug\service.csproj.CoreCompileInputs.cache
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\service\obj\Debug\service.csproj.Up2Date
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\service\obj\Debug\service.dll
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\service\obj\Debug\service.pdb
