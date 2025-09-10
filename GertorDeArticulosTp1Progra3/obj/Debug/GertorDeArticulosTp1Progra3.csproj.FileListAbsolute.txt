@@ -13,3 +13,5 @@ C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra
 C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\obj\Debug\GertorDe.F3FF8141.Up2Date
 C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\obj\Debug\GertorDeArticulosTp1Progra3.exe
 C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\obj\Debug\GertorDeArticulosTp1Progra3.pdb
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\obj\Debug\GertorDeArticulosTp1Progra3.exe.config
+C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\GertorDeArticulosTp1Progra3\obj\Debug\GertorDeArticulosTp1Progra3.frmAltaArticulo.resources

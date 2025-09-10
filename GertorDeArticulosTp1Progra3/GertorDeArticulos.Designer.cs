@@ -170,6 +170,7 @@
             this.btnAgregar.TabIndex = 16;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // dgvTablaArticulos
             // 
@@ -181,6 +182,7 @@
             this.dgvTablaArticulos.BackgroundColor = System.Drawing.Color.White;
             this.dgvTablaArticulos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvTablaArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTablaArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvTablaArticulos.Location = new System.Drawing.Point(402, 217);
             this.dgvTablaArticulos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvTablaArticulos.MultiSelect = false;

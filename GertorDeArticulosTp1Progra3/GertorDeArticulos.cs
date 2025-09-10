@@ -21,7 +21,14 @@ namespace GertorDeArticulosTp1Progra3
         private void GertorDeArticulos_Load(object sender, EventArgs e)
         {
             ArticuloService service = new ArticuloService();
-            dgvTablaArticulos.DataSource = service.listar();
+            dgvTablaArticulos.DataSource = service.Listar();
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmAltaArticulo alta = new frmAltaArticulo();
+            alta.ShowDialog();
+
         }
     }
 }
