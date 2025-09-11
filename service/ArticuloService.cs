@@ -19,18 +19,26 @@ namespace service
             try
             {
 
-                datos.setearConsulta("select Id, Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio FROM ARTICULOS;");
+                datos.setearConsulta("select A.id idArticulo, codigo, nombre, A.descripcion descArticulo, Precio, idMarca, idCategoria, M.Id codigoMarca,M.Descripcion descMarca, C.Id codigoCategoria, C.Descripcion descCategoria from ARTICULOS A, MARCAS M, CATEGORIAS C  where M.id = idMarca and C.id = IdMarca");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
-                    aux.id = (int)datos.Lector["Id"];
+                    aux.id = (int)datos.Lector["idArticulo"];
                     aux.codigoArticulo = (string)datos.Lector["Codigo"];
                     aux.nombre = (string)datos.Lector["Nombre"];
-                    aux.descripcion = (string)datos.Lector["Descripcion"];
-                    aux.marca = (int)datos.Lector["IDMarca"];
-                    aux.categoria = (int)datos.Lector["IdCategoria"];
+                    aux.descripcion = (string)datos.Lector["descArticulo"];
+                    aux.idMarca = (int)datos.Lector["idMarca"];
+                    aux.idCategoria = (int)datos.Lector["idCategoria"];
                     aux.precio = (decimal)datos.Lector["Precio"];
+
+                    aux.Marca = new Marca();
+                    aux.Marca.id = (int)datos.Lector["codigoMarca"];
+                    aux.Marca.descripcion = (string)datos.Lector["descMarca"];
+
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.id = (int)datos.Lector["codigoCategoria"];
+                    aux.Categoria.descripcion = (string)datos.Lector["descCategoria"];
                     lista.Add(aux);
                 }
 
@@ -39,69 +47,6 @@ namespace service
             catch (Exception)
             {
                 throw;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-
-        /*public List<Articulo> listar()
-        {
-            List<Articulo> lista = new List<Articulo>();
-            //SqlConnection conexion = new SqlConnection();
-            //SqlCommand comando = new SqlCommand();
-            SqlDataReader lector;
-
-            try
-            {
-                conexion.ConnectionString = "server=.\\SQLEXPRESS; database= CATALOGO_P3_DB; integrated security = true";
-                comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select Id, Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio FROM ARTICULOS;";
-                comando.Connection = conexion;
-                conexion.Open();
-                lector = comando.ExecuteReader();
-
-                while (lector.Read())
-                {
-                    Articulo aux = new Articulo();
-                    aux.id = lector.GetInt32(0);
-                    aux.codigoArticulo = (string)lector["Codigo"];
-                    aux.nombre = (string)lector["Nombre"];
-                    aux.descripcion = (string)lector["Descripcion"];
-                    aux.marca = (Int32)lector["IDMarca"];
-                    aux.categoria = (Int32)lector["IdCategoria"];
-                    aux.precio = (decimal)lector["Precio"];
-
-                    lista.Add(aux);
-                }
-                conexion.Close();
-                return lista;
-            }
-            catch (Exception)
-            {
-                //   MessageBox.Show("Error al listar artículos: " + ex.Message);
-            }
-            return lista;
-
-        }*/
-
-        public void agregar(Articulo nuevo)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            try
-            {
-                //datos.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio)values(" + nuevo.codigoArticulo + "," + nuevo.nombre + "," + nuevo.descripcion + ", " + nuevo.marca + "," + nuevo.categoria + ", " + nuevo.precio.ToString(System.Globalization.CultureInfo.InvariantCulture) + " )");
-                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES ('"+ nuevo.codigoArticulo + "','"+ nuevo.nombre + "','"+ nuevo.descripcion + "',"+ nuevo.marca + ","+ nuevo.categoria + ","+ nuevo.precio.ToString(System.Globalization.CultureInfo.InvariantCulture) + ")");
-                datos.ejecutarAccion();
-                
-
-
-
-            }
-            catch(Exception ex)
-            {
-                throw ex;
             }
             finally
             {
