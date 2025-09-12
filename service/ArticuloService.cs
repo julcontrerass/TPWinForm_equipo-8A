@@ -19,24 +19,33 @@ namespace service
             try
             {
 
+                datos.setearConsulta("select A.id idArticulo, codigo, nombre, A.descripcion descArticulo, Precio, idMarca, idCategoria, M.Id codigoMarca,M.Descripcion descMarca, C.Id codigoCategoria, C.Descripcion descCategoria from ARTICULOS A, MARCAS M, CATEGORIAS C  where M.id = idMarca and C.id = IdMarca");
+                datos.ejecutarLectura();
                 //datos.setearConsulta("select Id, Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio FROM ARTICULOS;");
-                datos.setearConsulta("select ART.Id, ART.Codigo, ART.Nombre, ART.Descripcion, ART.IdMarca, ART.IdCategoria, ART.Precio,(SELECT TOP 1 IMG.ImagenUrl FROM IMAGENES AS IMG WHERE ART.Id = IMG.IdArticulo) AS ImagenUrl FROM ARTICULOS as ART");
+                //datos.setearConsulta("select ART.Id, ART.Codigo, ART.Nombre, ART.Descripcion, ART.IdMarca, ART.IdCategoria, ART.Precio,(SELECT TOP 1 IMG.ImagenUrl FROM IMAGENES AS IMG WHERE ART.Id = IMG.IdArticulo) AS ImagenUrl FROM ARTICULOS as ART");
 
                 //select ART.Id, ART.Codigo, ART.Nombre, ART.Descripcion, ART.IdMarca, ART.IdCategoria, ART.Precio,(SELECT TOP 1 IMG.ImagenUrl FROM IMAGENES AS IMG WHERE ART.Id = IMG.IdArticulo) AS ImagenUrlFROM ARTICULOS as ART
 
 
-                datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
-                    aux.id = (int)datos.Lector["Id"];
+                    aux.id = (int)datos.Lector["idArticulo"];
                     aux.codigoArticulo = (string)datos.Lector["Codigo"];
                     aux.nombre = (string)datos.Lector["Nombre"];
-                    aux.descripcion = (string)datos.Lector["Descripcion"];
-                    aux.marca = (int)datos.Lector["IDMarca"];
-                    aux.categoria = (int)datos.Lector["IdCategoria"];
+                    aux.descripcion = (string)datos.Lector["descArticulo"];
+                    aux.idMarca = (int)datos.Lector["idMarca"];
+                    aux.idCategoria = (int)datos.Lector["idCategoria"];
                     aux.precio = (decimal)datos.Lector["Precio"];
                     aux.URLImagen = (string)datos.Lector["ImagenUrl"];
+
+                    aux.Marca = new Marca();
+                    aux.Marca.id = (int)datos.Lector["codigoMarca"];
+                    aux.Marca.descripcion = (string)datos.Lector["descMarca"];
+
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.id = (int)datos.Lector["codigoCategoria"];
+                    aux.Categoria.descripcion = (string)datos.Lector["descCategoria"];
                     lista.Add(aux);
                 }
 

@@ -24,26 +24,6 @@ namespace GertorDeArticulosTp1Progra3
             this.Close();
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
-        {
-            Articulo nuevoArticulo = new Articulo();
-            ArticuloService articuloService = new ArticuloService();
-            try
-            {
-                nuevoArticulo.codigoArticulo = txbCodigoAIngresar.Text;
-                nuevoArticulo.nombre = txbNombreAIngresar.Text;
-                nuevoArticulo.descripcion = txbDescripcionAIngresar.Text;
-                nuevoArticulo.marca = int.Parse(txbMarcaAIngresar.Text);
-                nuevoArticulo.categoria = int.Parse(txbCategoriaAIngresar.Text);
-                nuevoArticulo.precio = decimal.Parse(txbPrecioAIngresar.Text);
-                articuloService.agregar(nuevoArticulo);
-                MessageBox.Show("AGREGADO EXITOSAMENTE");
-                Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
+        
     }
 }

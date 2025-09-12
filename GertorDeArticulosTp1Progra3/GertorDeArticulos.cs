@@ -21,11 +21,7 @@ namespace GertorDeArticulosTp1Progra3
 
         private void GertorDeArticulos_Load(object sender, EventArgs e)
         {
-            ArticuloService service = new ArticuloService();
-            dgvTablaArticulos.DataSource = service.Listar();
-            dgvTablaArticulos.Columns["URLImagen"].Visible = false;
-            cargarImagen(pbImagenProducto, service.lista[0].URLImagen);
-            
+            cargarTabla();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -33,6 +29,17 @@ namespace GertorDeArticulosTp1Progra3
             frmAltaArticulo alta = new frmAltaArticulo();
             alta.ShowDialog();
 
+        }
+
+        private void cargarTabla()
+        {
+            ArticuloService service = new ArticuloService();
+            dgvTablaArticulos.DataSource = service.Listar();
+
+            dgvTablaArticulos.Columns["idCategoria"].Visible = false;
+            dgvTablaArticulos.Columns["idMarca"].Visible = false;
+            dgvTablaArticulos.Columns["URLImagen"].Visible = false;
+            cargarImagen(pbImagenProducto, service.lista[0].URLImagen);
         }
 
         private void dgvTablaArticulos_SelectionChanged(object sender, EventArgs e)
