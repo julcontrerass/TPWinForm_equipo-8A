@@ -11,15 +11,20 @@ namespace service
 {
     public class ArticuloService
     {
+        public List<Articulo> lista = new List<Articulo>();
         public List<Articulo> Listar()
         {
-            List<Articulo> lista = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
 
-                datos.setearConsulta("select Id, Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio FROM ARTICULOS;");
+                //datos.setearConsulta("select Id, Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio FROM ARTICULOS;");
+                datos.setearConsulta("select ART.Id, ART.Codigo, ART.Nombre, ART.Descripcion, ART.IdMarca, ART.IdCategoria, ART.Precio,(SELECT TOP 1 IMG.ImagenUrl FROM IMAGENES AS IMG WHERE ART.Id = IMG.IdArticulo) AS ImagenUrl FROM ARTICULOS as ART");
+
+                //select ART.Id, ART.Codigo, ART.Nombre, ART.Descripcion, ART.IdMarca, ART.IdCategoria, ART.Precio,(SELECT TOP 1 IMG.ImagenUrl FROM IMAGENES AS IMG WHERE ART.Id = IMG.IdArticulo) AS ImagenUrlFROM ARTICULOS as ART
+
+
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -31,6 +36,7 @@ namespace service
                     aux.marca = (int)datos.Lector["IDMarca"];
                     aux.categoria = (int)datos.Lector["IdCategoria"];
                     aux.precio = (decimal)datos.Lector["Precio"];
+                    aux.URLImagen = (string)datos.Lector["ImagenUrl"];
                     lista.Add(aux);
                 }
 
@@ -44,6 +50,11 @@ namespace service
             {
                 datos.cerrarConexion();
             }
+        }
+
+        public void CargarImagen(string url)
+        {
+
         }
 
         /*public List<Articulo> listar()

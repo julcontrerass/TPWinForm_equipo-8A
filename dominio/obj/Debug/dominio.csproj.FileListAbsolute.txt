@@ -4,3 +4,9 @@ C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\dominio\obj\Debug\dominio.
 C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\dominio\obj\Debug\dominio.csproj.CoreCompileInputs.cache
 C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\dominio\obj\Debug\dominio.dll
 C:\Users\juani\OneDrive\Desktop\TpGestorDeArticuloPr3\dominio\obj\Debug\dominio.pdb
+C:\Users\mader\OneDrive\Documents\Programacion 3\TPs\TpGestorDeArticuloPr3\dominio\bin\Debug\dominio.dll
+C:\Users\mader\OneDrive\Documents\Programacion 3\TPs\TpGestorDeArticuloPr3\dominio\bin\Debug\dominio.pdb
+C:\Users\mader\OneDrive\Documents\Programacion 3\TPs\TpGestorDeArticuloPr3\dominio\obj\Debug\dominio.csproj.AssemblyReference.cache
+C:\Users\mader\OneDrive\Documents\Programacion 3\TPs\TpGestorDeArticuloPr3\dominio\obj\Debug\dominio.csproj.CoreCompileInputs.cache
+C:\Users\mader\OneDrive\Documents\Programacion 3\TPs\TpGestorDeArticuloPr3\dominio\obj\Debug\dominio.dll
+C:\Users\mader\OneDrive\Documents\Programacion 3\TPs\TpGestorDeArticuloPr3\dominio\obj\Debug\dominio.pdb

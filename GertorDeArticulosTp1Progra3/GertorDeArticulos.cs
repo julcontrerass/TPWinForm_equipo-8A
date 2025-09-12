@@ -1,4 +1,5 @@
-﻿using service;
+﻿using dominio;
+using service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,9 @@ namespace GertorDeArticulosTp1Progra3
         {
             ArticuloService service = new ArticuloService();
             dgvTablaArticulos.DataSource = service.Listar();
+            dgvTablaArticulos.Columns["URLImagen"].Visible = false;
+            cargarImagen(pbImagenProducto, service.lista[0].URLImagen);
+            
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -30,5 +34,31 @@ namespace GertorDeArticulosTp1Progra3
             alta.ShowDialog();
 
         }
-    }
+
+        private void dgvTablaArticulos_SelectionChanged(object sender, EventArgs e)
+        {
+
+            string imagenArticuloActual = ((Articulo)dgvTablaArticulos.CurrentRow.DataBoundItem).URLImagen;
+            string imagenNoDisponible = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOZugSlXrDIB3SLtuip9ZDU1iJScEqfby_Q&s";
+            
+            try
+            {
+                cargarImagen(pbImagenProducto, imagenArticuloActual);
+
+            }
+            catch (Exception)
+            {
+                cargarImagen(pbImagenProducto,imagenNoDisponible);
+
+            }
+                
+               
+        }
+
+        private void cargarImagen(PictureBox pb, string URL)
+        {
+            pb.Load(URL);
+        }
+
+     }
 }
