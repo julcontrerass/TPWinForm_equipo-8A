@@ -19,4 +19,4 @@
 *.sln.docstates
 *.VC.db
 *.VC.VC.opendb
-.vsidx
+*.vsidx
