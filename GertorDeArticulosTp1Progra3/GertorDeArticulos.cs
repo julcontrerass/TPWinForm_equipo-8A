@@ -35,7 +35,6 @@ namespace GertorDeArticulosTp1Progra3
         {
             ArticuloService service = new ArticuloService();
             dgvTablaArticulos.DataSource = service.Listar();
-
             dgvTablaArticulos.Columns["idCategoria"].Visible = false;
             dgvTablaArticulos.Columns["idMarca"].Visible = false;
             dgvTablaArticulos.Columns["URLImagen"].Visible = false;
