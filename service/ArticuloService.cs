@@ -11,16 +11,22 @@ namespace service
 {
     public class ArticuloService
     {
+        public List<Articulo> lista = new List<Articulo>();
         public List<Articulo> Listar()
         {
-            List<Articulo> lista = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
 
-                datos.setearConsulta("select A.id idArticulo, codigo, nombre, A.descripcion descArticulo, Precio, idMarca, idCategoria, M.Id codigoMarca,M.Descripcion descMarca, C.Id codigoCategoria, C.Descripcion descCategoria from ARTICULOS A, MARCAS M, CATEGORIAS C  where M.id = idMarca and C.id = IdMarca");
+               //datos.setearConsulta("select ART.Id, ART.Codigo, ART.Nombre, ART.Descripcion, ART.IdMarca, ART.IdCategoria, ART.Precio,(SELECT TOP 1 IMG.ImagenUrl FROM IMAGENES AS IMG WHERE ART.Id = IMG.IdArticulo) AS ImagenUrl FROM ARTICULOS as ART");
+               //select ART.Id, ART.Codigo, ART.Nombre, ART.Descripcion, ART.IdMarca, ART.IdCategoria, ART.Precio,(SELECT TOP 1 IMG.ImagenUrl FROM IMAGENES AS IMG WHERE ART.Id = IMG.IdArticulo) AS ImagenUrlFROM ARTICULOS as ART
+               datos.setearConsulta("select A.id idArticulo, A.Codigo, A.Nombre, A.descripcion descArticulo, A.Precio, A.IdMarca, A.IdCategoria, M.Id codigoMarca, M.Descripcion descMarca, C.Id codigoCategoria, C.Descripcion descCategoria,(select top 1 I.ImagenUrl FROM IMAGENES I WHERE A.Id = I.IdArticulo) AS URLImagen from ARTICULOS A, MARCAS M, CATEGORIAS C where M.id = A.idMarca and C.id = A.IdCategoria");
+             
                 datos.ejecutarLectura();
+
+
+
                 while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
@@ -31,11 +37,10 @@ namespace service
                     aux.idMarca = (int)datos.Lector["idMarca"];
                     aux.idCategoria = (int)datos.Lector["idCategoria"];
                     aux.precio = (decimal)datos.Lector["Precio"];
-
+                    aux.URLImagen = (string)datos.Lector["URLImagen"];
                     aux.Marca = new Marca();
                     aux.Marca.id = (int)datos.Lector["codigoMarca"];
                     aux.Marca.descripcion = (string)datos.Lector["descMarca"];
-
                     aux.Categoria = new Categoria();
                     aux.Categoria.id = (int)datos.Lector["codigoCategoria"];
                     aux.Categoria.descripcion = (string)datos.Lector["descCategoria"];
@@ -44,9 +49,74 @@ namespace service
 
                 return lista;
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void CargarImagen(string url)
+        {
+
+        }
+
+        /*public List<Articulo> listar()
+        {
+            List<Articulo> lista = new List<Articulo>();
+            //SqlConnection conexion = new SqlConnection();
+            //SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            try
+            {
+                conexion.ConnectionString = "server=.\\SQLEXPRESS; database= CATALOGO_P3_DB; integrated security = true";
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "select Id, Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio FROM ARTICULOS;";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+
+                while (lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.id = lector.GetInt32(0);
+                    aux.codigoArticulo = (string)lector["Codigo"];
+                    aux.nombre = (string)lector["Nombre"];
+                    aux.descripcion = (string)lector["Descripcion"];
+                    aux.marca = (Int32)lector["IDMarca"];
+                    aux.categoria = (Int32)lector["IdCategoria"];
+                    aux.precio = (decimal)lector["Precio"];
+
+                    lista.Add(aux);
+                }
+                conexion.Close();
+                return lista;
+            }
             catch (Exception)
             {
-                throw;
+                //   MessageBox.Show("Error al listar artículos: " + ex.Message);
+            }
+            return lista;
+
+        }*/
+
+        public void agregar(Articulo nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                //datos.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio)values(" + nuevo.codigoArticulo + "," + nuevo.nombre + "," + nuevo.descripcion + ", " + nuevo.marca + "," + nuevo.categoria + ", " + nuevo.precio.ToString(System.Globalization.CultureInfo.InvariantCulture) + " )");
+                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES ('"+ nuevo.codigoArticulo + "','"+ nuevo.nombre + "','"+ nuevo.descripcion + "',"+ nuevo.Marca + ","+ nuevo.Categoria + ","+ nuevo.precio.ToString(System.Globalization.CultureInfo.InvariantCulture) + ")");
+                datos.ejecutarAccion();          
+            }
+            catch(Exception ex)
+            {
+                throw ex;
             }
             finally
             {
