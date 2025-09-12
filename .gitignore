@@ -1,0 +1,22 @@
+# =============================
+# Build 
+# =============================
+**/bin/
+**/obj/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+
+# =============================
+# Visual Studio 
+# =============================
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.VC.opendb
+.vsidx
