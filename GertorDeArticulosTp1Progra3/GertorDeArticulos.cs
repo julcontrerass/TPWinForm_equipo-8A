@@ -66,5 +66,24 @@ namespace GertorDeArticulosTp1Progra3
             pb.Load(URL);
         }
 
-     }
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ArticuloService articuloService = new ArticuloService();
+            Articulo seleccionado;
+            try
+            {
+                DialogResult resultado = MessageBox.Show("¿Seguro que desea eliminar el artículo?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (resultado == DialogResult.Yes)
+                {
+                    seleccionado = (Articulo)dgvTablaArticulos.CurrentRow.DataBoundItem;
+                    articuloService.eliminar(seleccionado.id);
+                    MessageBox.Show("Artículo eliminado");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+    }
 }
