@@ -85,5 +85,19 @@ namespace GertorDeArticulosTp1Progra3
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado;
+            if(dgvTablaArticulos.CurrentRow == null)
+            {
+                MessageBox.Show("No hay ningún artículo seleccionado");
+                return;
+            }
+            seleccionado = (Articulo)dgvTablaArticulos.CurrentRow.DataBoundItem;
+            frmAltaArticulo modificar = new frmAltaArticulo(seleccionado);
+            modificar.ShowDialog();
+            cargarTabla();
+        }
     }
 }
