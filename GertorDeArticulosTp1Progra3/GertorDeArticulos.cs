@@ -39,7 +39,7 @@ namespace GertorDeArticulosTp1Progra3
                 btnImagenAnterior.Enabled = false;
             }
         }
-        private void cargarImagen(PictureBox pb, string URL)
+        private void cargarImagen(PictureBox pb, string URL, string imagenBackup = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOZugSlXrDIB3SLtuip9ZDU1iJScEqfby_Q&s")
         {
             
             try
@@ -49,9 +49,9 @@ namespace GertorDeArticulosTp1Progra3
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-            }
-
+                pb.Load(imagenBackup);         
+                    }
+    
         }
         private void cambiarImagen(int nuevoIndice) {
 
@@ -63,15 +63,17 @@ namespace GertorDeArticulosTp1Progra3
             }
             else
             {
+
                 indexImagenActual = potencialNuevoindex;
+                string imagenBackup = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOZugSlXrDIB3SLtuip9ZDU1iJScEqfby_Q&s";
+                string imagenArticuloActual = ArticuloActual.URLImagenes[indexImagenActual].URL;
                 labelimagenActual.Text = "Imagen " + (indexImagenActual + 1).ToString() + " de " + ArticuloActual.URLImagenes.Count.ToString();
-                cargarImagen(pbImagenProducto, ArticuloActual.URLImagenes[indexImagenActual].URL);
+                cargarImagen(pbImagenProducto, imagenArticuloActual, imagenBackup);
 
             }
 
 
         }
-
 
         //eventos:
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -91,6 +93,8 @@ namespace GertorDeArticulosTp1Progra3
             indexImagenActual = 0;
             labelimagenActual.Text = "Imagen " + (indexImagenActual + 1).ToString() + " de " + ArticuloActual.URLImagenes.Count.ToString();
 
+
+
             if (ArticuloActual.URLImagenes.Count < 2) { 
             btnImagenAnterior.Enabled = false;
             btnImagenSiguiente.Enabled = false;
@@ -103,21 +107,10 @@ namespace GertorDeArticulosTp1Progra3
                 btnImagenSiguiente.Enabled=true;
             }
 
-                string imagenNoDisponible = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOZugSlXrDIB3SLtuip9ZDU1iJScEqfby_Q&s";
-            
-            try
-            {
+            string imagenBackup  = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOZugSlXrDIB3SLtuip9ZDU1iJScEqfby_Q&s";
             string imagenArticuloActual = ArticuloActual.URLImagenes[indexImagenActual].URL;
                 
-                cargarImagen(pbImagenProducto, imagenArticuloActual);
-
-            }
-            catch (Exception)
-            {
-                cargarImagen(pbImagenProducto,imagenNoDisponible);
-
-            }
-                
+                cargarImagen(pbImagenProducto, imagenArticuloActual, imagenBackup);    
                
         }
         private void btnImagenSiguiente_Click(object sender, EventArgs e)
