@@ -123,5 +123,49 @@ namespace service
                 datos.cerrarConexion();
             }
         }
+
+        public void eliminar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("Delete from ARTICULOS where id = @id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void modificar(Articulo articulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, IdMarca = @idMarca, IdCategoria = @idCategoria, Precio = @precio where id = @id");
+                datos.setearParametro("@codigo", articulo.codigoArticulo);
+                datos.setearParametro("@nombre", articulo.nombre);
+                datos.setearParametro("@descripcion", articulo.descripcion);
+                datos.setearParametro("@idMarca", articulo.idMarca);
+                datos.setearParametro("@idCategoria", articulo.idCategoria);
+                datos.setearParametro("@precio", articulo.precio);
+                datos.setearParametro("@id", articulo.id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
