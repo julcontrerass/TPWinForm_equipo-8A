@@ -29,9 +29,9 @@ namespace GertorDeArticulosTp1Progra3
             ArticuloActual = service.lista[0];
             dgvTablaArticulos.Columns["idCategoria"].Visible = false;
             dgvTablaArticulos.Columns["idMarca"].Visible = false;
-            cargarImagen(pbImagenProducto, ArticuloActual.URLImagenes[0].URL);
             indexImagenActual = 0;
             labelimagenActual.Text = "Imagen " + (indexImagenActual+ 1).ToString() + " de " + ArticuloActual.URLImagenes.Count.ToString();
+            cargarImagen(indexImagenActual);
 
             if(ArticuloActual.URLImagenes.Count < 2)
             {
@@ -39,20 +39,40 @@ namespace GertorDeArticulosTp1Progra3
                 btnImagenAnterior.Enabled = false;
             }
         }
-        private void cargarImagen(PictureBox pb, string URL, string imagenBackup = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOZugSlXrDIB3SLtuip9ZDU1iJScEqfby_Q&s")
+        private void cargarImagen(int nuevoIndex)
         {
             
+            labelimagenActual.Text = "Imagen " + (indexImagenActual + 1).ToString() + " de " + ArticuloActual.URLImagenes.Count.ToString();
+            string imagenBackup = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOZugSlXrDIB3SLtuip9ZDU1iJScEqfby_Q&s";
+            string imagenArticuloActual = ArticuloActual.URLImagenes[nuevoIndex].URL;
+
+            // Botones imagen anterior-siguiente:
+            if (ArticuloActual.URLImagenes.Count < 2)
+            {
+                btnImagenAnterior.Enabled = false;
+                btnImagenSiguiente.Enabled = false;
+            }
+            else
+            {
+                btnImagenAnterior.Visible = true;
+                btnImagenSiguiente.Visible = true;
+                btnImagenAnterior.Enabled = true;
+                btnImagenSiguiente.Enabled = true;
+            }
+
+
+
             try
             {
-            pb.Load(URL);
+            pbImagenProducto.Load(imagenArticuloActual);
 
             }
             catch (Exception ex)
             {
-                pb.Load(imagenBackup);         
-                    }
-    
-        }
+                pbImagenProducto.Load(imagenBackup);         
+            }       
+                 }
+
         private void cambiarImagen(int nuevoIndice) {
 
             int potencialNuevoindex = indexImagenActual + nuevoIndice;
@@ -68,7 +88,7 @@ namespace GertorDeArticulosTp1Progra3
                 string imagenBackup = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOZugSlXrDIB3SLtuip9ZDU1iJScEqfby_Q&s";
                 string imagenArticuloActual = ArticuloActual.URLImagenes[indexImagenActual].URL;
                 labelimagenActual.Text = "Imagen " + (indexImagenActual + 1).ToString() + " de " + ArticuloActual.URLImagenes.Count.ToString();
-                cargarImagen(pbImagenProducto, imagenArticuloActual, imagenBackup);
+                cargarImagen(indexImagenActual);
 
             }
 
@@ -88,29 +108,11 @@ namespace GertorDeArticulosTp1Progra3
         }
         private void dgvTablaArticulos_SelectionChanged(object sender, EventArgs e)
         {
-                     
+
+            if (dgvTablaArticulos.CurrentRow == null) return;
             ArticuloActual = ((Articulo)dgvTablaArticulos.CurrentRow.DataBoundItem);
             indexImagenActual = 0;
-            labelimagenActual.Text = "Imagen " + (indexImagenActual + 1).ToString() + " de " + ArticuloActual.URLImagenes.Count.ToString();
-
-
-
-            if (ArticuloActual.URLImagenes.Count < 2) { 
-            btnImagenAnterior.Enabled = false;
-            btnImagenSiguiente.Enabled = false;
-            }
-            else
-            {
-                btnImagenAnterior.Visible = true;
-                btnImagenSiguiente.Visible = true;
-                btnImagenAnterior.Enabled=true;
-                btnImagenSiguiente.Enabled=true;
-            }
-
-            string imagenBackup  = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOZugSlXrDIB3SLtuip9ZDU1iJScEqfby_Q&s";
-            string imagenArticuloActual = ArticuloActual.URLImagenes[indexImagenActual].URL;
-                
-                cargarImagen(pbImagenProducto, imagenArticuloActual, imagenBackup);    
+            cambiarImagen(0);           
                
         }
         private void btnImagenSiguiente_Click(object sender, EventArgs e)

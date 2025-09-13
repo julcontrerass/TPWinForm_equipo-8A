@@ -83,12 +83,6 @@ namespace service
             }
         }
 
-        public void CargarImagen(string url) {
-        
-            // este metodo esta resuelto mostrando las imagenes desde el formulario gestordearticulo. Los string de las url ya estan en la tabla de listado de productos inicial
-
-        }
-
         /*public List<Articulo> listar()
         {
             List<Articulo> lista = new List<Articulo>();
