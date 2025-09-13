@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pbImagenProducto = new System.Windows.Forms.PictureBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.lblCategoriaFiltro = new System.Windows.Forms.Label();
@@ -43,6 +43,9 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.dgvTablaArticulos = new System.Windows.Forms.DataGridView();
             this.lblTituloArticulos = new System.Windows.Forms.Label();
+            this.btnImagenAnterior = new System.Windows.Forms.Button();
+            this.btnImagenSiguiente = new System.Windows.Forms.Button();
+            this.labelimagenActual = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagenProducto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTablaArticulos)).BeginInit();
             this.SuspendLayout();
@@ -169,8 +172,8 @@
             // 
             this.dgvTablaArticulos.AllowUserToAddRows = false;
             this.dgvTablaArticulos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            this.dgvTablaArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dgvTablaArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTablaArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -201,11 +204,43 @@
             this.lblTituloArticulos.TabIndex = 14;
             this.lblTituloArticulos.Text = "Tus Articulos";
             // 
+            // btnImagenAnterior
+            // 
+            this.btnImagenAnterior.Location = new System.Drawing.Point(1002, 371);
+            this.btnImagenAnterior.Name = "btnImagenAnterior";
+            this.btnImagenAnterior.Size = new System.Drawing.Size(75, 23);
+            this.btnImagenAnterior.TabIndex = 28;
+            this.btnImagenAnterior.Text = "Anterior";
+            this.btnImagenAnterior.UseVisualStyleBackColor = true;
+            this.btnImagenAnterior.Click += new System.EventHandler(this.btnImagenAnterior_Click);
+            // 
+            // btnImagenSiguiente
+            // 
+            this.btnImagenSiguiente.Location = new System.Drawing.Point(1093, 371);
+            this.btnImagenSiguiente.Name = "btnImagenSiguiente";
+            this.btnImagenSiguiente.Size = new System.Drawing.Size(75, 23);
+            this.btnImagenSiguiente.TabIndex = 29;
+            this.btnImagenSiguiente.Text = "Siguiente";
+            this.btnImagenSiguiente.UseVisualStyleBackColor = true;
+            this.btnImagenSiguiente.Click += new System.EventHandler(this.btnImagenSiguiente_Click);
+            // 
+            // labelimagenActual
+            // 
+            this.labelimagenActual.AutoSize = true;
+            this.labelimagenActual.Location = new System.Drawing.Point(1047, 349);
+            this.labelimagenActual.Name = "labelimagenActual";
+            this.labelimagenActual.Size = new System.Drawing.Size(42, 13);
+            this.labelimagenActual.TabIndex = 30;
+            this.labelimagenActual.Text = "Imagen";
+            // 
             // GertorDeArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1283, 554);
+            this.Controls.Add(this.labelimagenActual);
+            this.Controls.Add(this.btnImagenSiguiente);
+            this.Controls.Add(this.btnImagenAnterior);
             this.Controls.Add(this.pbImagenProducto);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.lblCategoriaFiltro);
@@ -248,6 +283,9 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.DataGridView dgvTablaArticulos;
         private System.Windows.Forms.Label lblTituloArticulos;
+        private System.Windows.Forms.Button btnImagenAnterior;
+        private System.Windows.Forms.Button btnImagenSiguiente;
+        private System.Windows.Forms.Label labelimagenActual;
     }
 }
 
