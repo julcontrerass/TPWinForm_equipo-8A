@@ -39,9 +39,11 @@
             this.lblMarcaAIngresar = new System.Windows.Forms.Label();
             this.lblCategoriaAIngresar = new System.Windows.Forms.Label();
             this.lblPrecioAIngresar = new System.Windows.Forms.Label();
-            this.txbMarcaAIngresar = new System.Windows.Forms.TextBox();
-            this.txbCategoriaAIngresar = new System.Windows.Forms.TextBox();
             this.txbPrecioAIngresar = new System.Windows.Forms.TextBox();
+            this.txbUrlImagen = new System.Windows.Forms.TextBox();
+            this.lblUrlImagenAIngresar = new System.Windows.Forms.Label();
+            this.cbxMarca = new System.Windows.Forms.ComboBox();
+            this.cbxCategoria = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblCodigoAIgresar
@@ -100,6 +102,7 @@
             this.btnAceptar.TabIndex = 6;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnCancelar
             // 
@@ -138,20 +141,6 @@
             this.lblPrecioAIngresar.TabIndex = 10;
             this.lblPrecioAIngresar.Text = "Precio:";
             // 
-            // txbMarcaAIngresar
-            // 
-            this.txbMarcaAIngresar.Location = new System.Drawing.Point(159, 163);
-            this.txbMarcaAIngresar.Name = "txbMarcaAIngresar";
-            this.txbMarcaAIngresar.Size = new System.Drawing.Size(290, 26);
-            this.txbMarcaAIngresar.TabIndex = 11;
-            // 
-            // txbCategoriaAIngresar
-            // 
-            this.txbCategoriaAIngresar.Location = new System.Drawing.Point(159, 198);
-            this.txbCategoriaAIngresar.Name = "txbCategoriaAIngresar";
-            this.txbCategoriaAIngresar.Size = new System.Drawing.Size(290, 26);
-            this.txbCategoriaAIngresar.TabIndex = 12;
-            // 
             // txbPrecioAIngresar
             // 
             this.txbPrecioAIngresar.Location = new System.Drawing.Point(159, 239);
@@ -159,14 +148,48 @@
             this.txbPrecioAIngresar.Size = new System.Drawing.Size(290, 26);
             this.txbPrecioAIngresar.TabIndex = 13;
             // 
+            // txbUrlImagen
+            // 
+            this.txbUrlImagen.Location = new System.Drawing.Point(159, 284);
+            this.txbUrlImagen.Name = "txbUrlImagen";
+            this.txbUrlImagen.Size = new System.Drawing.Size(290, 26);
+            this.txbUrlImagen.TabIndex = 14;
+            // 
+            // lblUrlImagenAIngresar
+            // 
+            this.lblUrlImagenAIngresar.AutoSize = true;
+            this.lblUrlImagenAIngresar.Location = new System.Drawing.Point(34, 287);
+            this.lblUrlImagenAIngresar.Name = "lblUrlImagenAIngresar";
+            this.lblUrlImagenAIngresar.Size = new System.Drawing.Size(91, 20);
+            this.lblUrlImagenAIngresar.TabIndex = 15;
+            this.lblUrlImagenAIngresar.Text = "Url Imagen:";
+            // 
+            // cbxMarca
+            // 
+            this.cbxMarca.FormattingEnabled = true;
+            this.cbxMarca.Location = new System.Drawing.Point(159, 163);
+            this.cbxMarca.Name = "cbxMarca";
+            this.cbxMarca.Size = new System.Drawing.Size(290, 28);
+            this.cbxMarca.TabIndex = 16;
+            // 
+            // cbxCategoria
+            // 
+            this.cbxCategoria.FormattingEnabled = true;
+            this.cbxCategoria.Location = new System.Drawing.Point(159, 198);
+            this.cbxCategoria.Name = "cbxCategoria";
+            this.cbxCategoria.Size = new System.Drawing.Size(290, 28);
+            this.cbxCategoria.TabIndex = 17;
+            // 
             // frmAltaArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbxCategoria);
+            this.Controls.Add(this.cbxMarca);
+            this.Controls.Add(this.lblUrlImagenAIngresar);
+            this.Controls.Add(this.txbUrlImagen);
             this.Controls.Add(this.txbPrecioAIngresar);
-            this.Controls.Add(this.txbCategoriaAIngresar);
-            this.Controls.Add(this.txbMarcaAIngresar);
             this.Controls.Add(this.lblPrecioAIngresar);
             this.Controls.Add(this.lblCategoriaAIngresar);
             this.Controls.Add(this.lblMarcaAIngresar);
@@ -181,6 +204,7 @@
             this.Name = "frmAltaArticulo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta Articulo";
+            this.Load += new System.EventHandler(this.frmAltaArticulo_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,8 +223,10 @@
         private System.Windows.Forms.Label lblMarcaAIngresar;
         private System.Windows.Forms.Label lblCategoriaAIngresar;
         private System.Windows.Forms.Label lblPrecioAIngresar;
-        private System.Windows.Forms.TextBox txbMarcaAIngresar;
-        private System.Windows.Forms.TextBox txbCategoriaAIngresar;
         private System.Windows.Forms.TextBox txbPrecioAIngresar;
+        private System.Windows.Forms.TextBox txbUrlImagen;
+        private System.Windows.Forms.Label lblUrlImagenAIngresar;
+        private System.Windows.Forms.ComboBox cbxMarca;
+        private System.Windows.Forms.ComboBox cbxCategoria;
     }
 }
