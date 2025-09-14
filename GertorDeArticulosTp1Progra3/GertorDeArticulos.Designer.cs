@@ -1,4 +1,4 @@
-﻿namespace GertorDeArticulosTp1Progra3
+namespace GertorDeArticulosTp1Progra3
 {
     partial class GertorDeArticulos
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pbImagenProducto = new System.Windows.Forms.PictureBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.lblCategoriaFiltro = new System.Windows.Forms.Label();
@@ -54,7 +54,7 @@
             // 
             // pbImagenProducto
             // 
-            this.pbImagenProducto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.pbImagenProducto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbImagenProducto.Location = new System.Drawing.Point(866, 122);
             this.pbImagenProducto.Name = "pbImagenProducto";
@@ -135,7 +135,7 @@
             // 
             // txtbBuscador
             // 
-            this.txtbBuscador.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtbBuscador.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtbBuscador.Location = new System.Drawing.Point(331, 103);
             this.txtbBuscador.Name = "txtbBuscador";
@@ -176,10 +176,10 @@
             // 
             this.dgvTablaArticulos.AllowUserToAddRows = false;
             this.dgvTablaArticulos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvTablaArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvTablaArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            this.dgvTablaArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvTablaArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTablaArticulos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvTablaArticulos.BackgroundColor = System.Drawing.Color.White;
@@ -198,7 +198,7 @@
             // 
             // lblTituloArticulos
             // 
-            this.lblTituloArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblTituloArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTituloArticulos.AutoSize = true;
             this.lblTituloArticulos.Font = new System.Drawing.Font("Microsoft YaHei UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -212,7 +212,7 @@
             // 
             this.btnImagenAnterior.Location = new System.Drawing.Point(963, 372);
             this.btnImagenAnterior.Name = "btnImagenAnterior";
-            this.btnImagenAnterior.Size = new System.Drawing.Size(75, 23);
+            this.btnImagenAnterior.Size = new System.Drawing.Size(74, 24);
             this.btnImagenAnterior.TabIndex = 28;
             this.btnImagenAnterior.Text = "Anterior";
             this.btnImagenAnterior.UseVisualStyleBackColor = true;
@@ -222,7 +222,7 @@
             // 
             this.btnImagenSiguiente.Location = new System.Drawing.Point(1054, 372);
             this.btnImagenSiguiente.Name = "btnImagenSiguiente";
-            this.btnImagenSiguiente.Size = new System.Drawing.Size(75, 23);
+            this.btnImagenSiguiente.Size = new System.Drawing.Size(74, 24);
             this.btnImagenSiguiente.TabIndex = 29;
             this.btnImagenSiguiente.Text = "Siguiente";
             this.btnImagenSiguiente.UseVisualStyleBackColor = true;
@@ -281,7 +281,7 @@
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dgvTablaArticulos);
             this.Controls.Add(this.lblTituloArticulos);
-            this.MinimumSize = new System.Drawing.Size(1299, 593);
+            this.MinimumSize = new System.Drawing.Size(1284, 587);
             this.Name = "GertorDeArticulos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestor De Articulos";
@@ -316,4 +316,5 @@
         private System.Windows.Forms.Button btnModMarcas;
     }
 }
+
 

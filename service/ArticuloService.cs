@@ -1,4 +1,4 @@
-﻿using dominio;
+using dominio;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -27,7 +27,7 @@ namespace service
 
 
                 while (datos.Lector.Read())
-                { 
+                {
 
                     int idProductoActual = (int)datos.Lector["idArticulo"];
                     string URL = (string)datos.Lector["URLImagen"];
@@ -39,7 +39,7 @@ namespace service
                         imagen.IdImagen = idImagen;
                         imagen.URL = URL;
                         imagen.IdArticulo = idProductoActual;
-                        lista.Last().URLImagenes.Add(imagen);                        
+                        lista.Last().URLImagenes.Add(imagen);
                     }
                     else
                     {
@@ -68,7 +68,7 @@ namespace service
                         aux.Categoria.descripcion = (string)datos.Lector["descCategoria"];
                         lista.Add(aux);
                     }
-                    prodAnterior = idProductoActual;                    
+                    prodAnterior = idProductoActual;
                 }
 
                 return lista;
@@ -174,3 +174,4 @@ namespace service
 
     }
 }
+
