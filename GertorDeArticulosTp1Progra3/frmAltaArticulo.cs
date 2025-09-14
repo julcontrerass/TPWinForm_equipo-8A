@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
 using service;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GertorDeArticulosTp1Progra3
 {
@@ -16,6 +17,7 @@ namespace GertorDeArticulosTp1Progra3
     {
 
         private Articulo articulo = null;
+
         public frmAltaArticulo()
         {
             InitializeComponent();
@@ -25,32 +27,13 @@ namespace GertorDeArticulosTp1Progra3
         {
             InitializeComponent();
             this.articulo = articulo;
-            Text = "Editar Artículo";
         }
+
+
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void frmAltaArticulo_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                if(articulo != null)
-                {
-                    txbCodigoAIngresar.Text = articulo.codigoArticulo;
-                    txbNombreAIngresar.Text = articulo.nombre;
-                    txbDescripcionAIngresar.Text = articulo.descripcion;
-                    txbPrecioAIngresar.Text = articulo.precio.ToString();
-                    //txbUrlImagen.Text = articulo.URLImagen;
-                    lblCodigoAIgresar.Text = "Modificar Artículo";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -60,11 +43,25 @@ namespace GertorDeArticulosTp1Progra3
             {
                 if (articulo == null)
                     articulo = new Articulo();
+
                 articulo.codigoArticulo = txbCodigoAIngresar.Text;
                 articulo.nombre = txbNombreAIngresar.Text;
                 articulo.descripcion = txbDescripcionAIngresar.Text;
                 articulo.precio = decimal.Parse(txbPrecioAIngresar.Text);
-                //articulo.URLImagen = txbUrlImagen.Text;
+                articulo.idMarca = (int)cbxMarca.SelectedValue;
+                articulo.idCategoria = (int)cbxCategoria.SelectedValue;
+
+                // Asegurar que Imagen no sea null y setear URL
+                articulo.Imagen = new Imagen();
+                articulo.Imagen.URL = txbUrlImagen.Text?.Trim();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            try
+            {
                 if (articulo.id != 0)
                 {
                     articuloService.modificar(articulo);
@@ -75,7 +72,6 @@ namespace GertorDeArticulosTp1Progra3
                     articuloService.agregar(articulo);
                     MessageBox.Show("Agregado exitosamente");
                 }
-
                 this.Close();
             }
             catch (Exception ex)
@@ -84,19 +80,30 @@ namespace GertorDeArticulosTp1Progra3
             }
         }
 
-        private void frmAltaArticulo_Load_1(object sender, EventArgs e)
+        private void frmAltaArticulo_Load(object sender, EventArgs e)
         {
             try
             {
+                MarcaService marca = new MarcaService();
+                List<Marca> listaMarcas = marca.Listar();
+                cbxMarca.DataSource = listaMarcas;
+                cbxMarca.DisplayMember = "descripcion";
+                cbxMarca.ValueMember = "id";
+
+                CategoriaService categoria = new CategoriaService();
+                List<Categoria> listaCategorias = categoria.Listar();
+                cbxCategoria.DataSource = listaCategorias;
+                cbxCategoria.DisplayMember = "descripcion";
+                cbxCategoria.ValueMember = "id";
+
                 if (articulo != null)
                 {
+                    lblTituloNuevoArticulo.Text = "Editar articulo";
+
                     txbCodigoAIngresar.Text = articulo.codigoArticulo;
                     txbNombreAIngresar.Text = articulo.nombre;
                     txbDescripcionAIngresar.Text = articulo.descripcion;
                     txbPrecioAIngresar.Text = articulo.precio.ToString();
-
-                    //txbUrlImagen.Text = articulo.URLImagen;
-                    //lblCodigoAIgresar.Text = "Modificar Artículo";
                 }
             }
             catch (Exception ex)
