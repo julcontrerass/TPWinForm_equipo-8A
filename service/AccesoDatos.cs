@@ -76,5 +76,26 @@ namespace service
             }
             conexion.Close();
         }
+       
+
+        public object ejecutarScalar()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                return comando.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void limpiarParametros()
+        {
+            comando.Parameters.Clear();
+        }
+
+
     }
 }

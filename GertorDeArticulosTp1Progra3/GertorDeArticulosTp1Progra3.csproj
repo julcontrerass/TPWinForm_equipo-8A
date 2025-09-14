@@ -52,6 +52,12 @@
     <Compile Include="frmAltaArticulo.Designer.cs">
       <DependentUpon>frmAltaArticulo.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmModificarMarcasyCategorias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModificarMarcasyCategorias.Designer.cs">
+      <DependentUpon>frmModificarMarcasyCategorias.cs</DependentUpon>
+    </Compile>
     <Compile Include="GertorDeArticulos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAltaArticulo.resx">
       <DependentUpon>frmAltaArticulo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmModificarMarcasyCategorias.resx">
+      <DependentUpon>frmModificarMarcasyCategorias.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GertorDeArticulos.resx">
       <DependentUpon>GertorDeArticulos.cs</DependentUpon>

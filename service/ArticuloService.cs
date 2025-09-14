@@ -1,4 +1,4 @@
-﻿using dominio;
+using dominio;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -26,7 +26,7 @@ namespace service
 
 
                 while (datos.Lector.Read())
-                { 
+                {
 
                     int idProductoActual = (int)datos.Lector["idArticulo"];
                     string URL = (string)datos.Lector["URLImagen"];
@@ -38,7 +38,7 @@ namespace service
                         imagen.IdImagen = idImagen;
                         imagen.URL = URL;
                         imagen.IdArticulo = idProductoActual;
-                        lista.Last().URLImagenes.Add(imagen);                        
+                        lista.Last().URLImagenes.Add(imagen);
                     }
                     else
                     {
@@ -67,7 +67,7 @@ namespace service
                         aux.Categoria.descripcion = (string)datos.Lector["descCategoria"];
                         lista.Add(aux);
                     }
-                    prodAnterior = idProductoActual;                    
+                    prodAnterior = idProductoActual;
                 }
 
                 return lista;
@@ -82,58 +82,45 @@ namespace service
             }
         }
 
-        /*public List<Articulo> listar()
-        {
-            List<Articulo> lista = new List<Articulo>();
-            //SqlConnection conexion = new SqlConnection();
-            //SqlCommand comando = new SqlCommand();
-            SqlDataReader lector;
-
-            try
-            {
-                conexion.ConnectionString = "server=.\\SQLEXPRESS; database= CATALOGO_P3_DB; integrated security = true";
-                comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select Id, Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio FROM ARTICULOS;";
-                comando.Connection = conexion;
-                conexion.Open();
-                lector = comando.ExecuteReader();
-
-                while (lector.Read())
-                {
-                    Articulo aux = new Articulo();
-                    aux.id = lector.GetInt32(0);
-                    aux.codigoArticulo = (string)lector["Codigo"];
-                    aux.nombre = (string)lector["Nombre"];
-                    aux.descripcion = (string)lector["Descripcion"];
-                    aux.marca = (Int32)lector["IDMarca"];
-                    aux.categoria = (Int32)lector["IdCategoria"];
-                    aux.precio = (decimal)lector["Precio"];
-
-                    lista.Add(aux);
-                }
-                conexion.Close();
-                return lista;
-            }
-            catch (Exception)
-            {
-                //   MessageBox.Show("Error al listar artículos: " + ex.Message);
-            }
-            return lista;
-
-        }*/
-
         public void agregar(Articulo nuevo)
         {
-            AccesoDatos datos = new AccesoDatos();
+            var datos = new AccesoDatos();
             try
             {
-                //datos.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio)values(" + nuevo.codigoArticulo + "," + nuevo.nombre + "," + nuevo.descripcion + ", " + nuevo.marca + "," + nuevo.categoria + ", " + nuevo.precio.ToString(System.Globalization.CultureInfo.InvariantCulture) + " )");
-                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES ('"+ nuevo.codigoArticulo + "','"+ nuevo.nombre + "','"+ nuevo.descripcion + "',"+ nuevo.Marca + ","+ nuevo.Categoria + ","+ nuevo.precio.ToString(System.Globalization.CultureInfo.InvariantCulture) + ")");
-                datos.ejecutarAccion();          
-            }
-            catch(Exception ex)
-            {
-                throw ex;
+                datos.setearConsulta(
+                    "INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) " +
+                    "OUTPUT INSERTED.Id VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio)");
+                datos.setearParametro("@Codigo", nuevo.codigoArticulo);
+                datos.setearParametro("@Nombre", nuevo.nombre);
+                datos.setearParametro("@Descripcion", nuevo.descripcion);
+                datos.setearParametro("@IdMarca", nuevo.idMarca);
+                datos.setearParametro("@IdCategoria", nuevo.idCategoria);
+                datos.setearParametro("@Precio", nuevo.precio);
+
+                int nuevoId = (int)datos.ejecutarScalar();
+                datos.cerrarConexion();
+
+                if (nuevo.URLImagenes != null && nuevo.URLImagenes.Count > 0)
+                {
+                    foreach (var img in nuevo.URLImagenes)
+                    {
+                        if (string.IsNullOrWhiteSpace(img.URL)) continue;
+
+                        var datosImg = new AccesoDatos();
+                        try
+                        {
+                            datosImg.setearConsulta(
+                                "INSERT INTO IMAGENES (IdArticulo, ImagenUrl) VALUES (@IdArticulo, @ImagenUrl)");
+                            datosImg.setearParametro("@IdArticulo", nuevoId);
+                            datosImg.setearParametro("@ImagenUrl", img.URL.Trim());
+                            datosImg.ejecutarAccion();
+                        }
+                        finally
+                        {
+                            datosImg.cerrarConexion();
+                        }
+                    }
+                }
             }
             finally
             {
@@ -146,9 +133,15 @@ namespace service
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Delete from ARTICULOS where id = @id");
-                datos.setearParametro("@id", id);
+                datos.setearConsulta("delete from ARTICULOS where Id = @Id");
+                datos.setearParametro("@Id", id);
                 datos.ejecutarAccion();
+                datos.cerrarConexion();
+
+                datos.setearConsulta("delete from Imagenes where IdArticulo = @IdArticulo");
+                datos.setearParametro("@IdArticulo", id);
+                datos.ejecutarAccion();
+
             }
             catch (Exception ex)
             {
@@ -165,7 +158,7 @@ namespace service
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, IdMarca = @idMarca, IdCategoria = @idCategoria, Precio = @precio where id = @id");
+                datos.setearConsulta("UPDATE ARTICULOS SET Codigo=@codigo, Nombre=@nombre, Descripcion=@descripcion, IdMarca=@idMarca, IdCategoria=@idCategoria, Precio=@precio WHERE Id=@id");
                 datos.setearParametro("@codigo", articulo.codigoArticulo);
                 datos.setearParametro("@nombre", articulo.nombre);
                 datos.setearParametro("@descripcion", articulo.descripcion);
@@ -174,6 +167,29 @@ namespace service
                 datos.setearParametro("@precio", articulo.precio);
                 datos.setearParametro("@id", articulo.id);
                 datos.ejecutarAccion();
+                datos.cerrarConexion();
+                datos.limpiarParametros();
+
+                datos.setearConsulta("DELETE FROM IMAGENES WHERE IdArticulo = @IdArticulo");
+                datos.setearParametro("@IdArticulo", articulo.id);
+                datos.ejecutarAccion();
+                datos.cerrarConexion();
+                datos.limpiarParametros(); 
+
+                if (articulo.URLImagenes != null && articulo.URLImagenes.Count > 0)
+                {
+                    foreach (var img in articulo.URLImagenes)
+                    {
+                        if (string.IsNullOrWhiteSpace(img.URL)) continue;
+
+                        datos.setearConsulta("INSERT INTO IMAGENES (IdArticulo, ImagenUrl) VALUES (@IdArticulo, @ImagenUrl)");
+                        datos.setearParametro("@IdArticulo", articulo.id);
+                        datos.setearParametro("@ImagenUrl", img.URL.Trim());
+                        datos.ejecutarAccion();
+                        datos.cerrarConexion();
+                        datos.limpiarParametros();   
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -184,7 +200,6 @@ namespace service
                 datos.cerrarConexion();
             }
         }
-
         public List<Articulo> filtroAvanzado(string marca, string categoria)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -283,5 +298,7 @@ namespace service
                     datos.cerrarConexion();
                 }
         }
+
     }
 }
+
