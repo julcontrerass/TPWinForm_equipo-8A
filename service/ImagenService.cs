@@ -35,6 +35,26 @@ namespace service
                 datos.cerrarConexion();
             }
         }
+        public void eliminar(int idArticulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("delete from IMAGENES where IdArticulo = @idArticulo");
+                datos.setearParametro("@idArticulo", idArticulo);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
+
+
 
 }

@@ -89,8 +89,8 @@ namespace service
             try
             {
                 datos.setearConsulta(
-                  "INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) " +
-                  "OUTPUT INSERTED.Id VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio)");
+                    "INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) " +
+                    "OUTPUT INSERTED.Id VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio)");
                 datos.setearParametro("@Codigo", nuevo.codigoArticulo);
                 datos.setearParametro("@Nombre", nuevo.nombre);
                 datos.setearParametro("@Descripcion", nuevo.descripcion);
@@ -99,23 +99,27 @@ namespace service
                 datos.setearParametro("@Precio", nuevo.precio);
 
                 int nuevoId = (int)datos.ejecutarScalar();
-
                 datos.cerrarConexion();
 
-                if (!string.IsNullOrWhiteSpace(nuevo.Imagen?.URL))
+                if (nuevo.URLImagenes != null && nuevo.URLImagenes.Count > 0)
                 {
-                    var datosImg = new AccesoDatos();
-                    try
+                    foreach (var img in nuevo.URLImagenes)
                     {
-                        datosImg.setearConsulta(
-                            "INSERT INTO IMAGENES (IdArticulo, ImagenUrl) VALUES (@IdArticulo, @ImagenUrl)");
-                        datosImg.setearParametro("@IdArticulo", nuevoId);
-                        datosImg.setearParametro("@ImagenUrl", nuevo.Imagen.URL);
-                        datosImg.ejecutarAccion();
-                    }
-                    finally
-                    {
-                        datosImg.cerrarConexion();
+                        if (string.IsNullOrWhiteSpace(img.URL)) continue;
+
+                        var datosImg = new AccesoDatos();
+                        try
+                        {
+                            datosImg.setearConsulta(
+                                "INSERT INTO IMAGENES (IdArticulo, ImagenUrl) VALUES (@IdArticulo, @ImagenUrl)");
+                            datosImg.setearParametro("@IdArticulo", nuevoId);
+                            datosImg.setearParametro("@ImagenUrl", img.URL.Trim());
+                            datosImg.ejecutarAccion();
+                        }
+                        finally
+                        {
+                            datosImg.cerrarConexion();
+                        }
                     }
                 }
             }
@@ -155,7 +159,7 @@ namespace service
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, IdMarca = @idMarca, IdCategoria = @idCategoria, Precio = @precio where id = @id");
+                datos.setearConsulta("UPDATE ARTICULOS SET Codigo=@codigo, Nombre=@nombre, Descripcion=@descripcion, IdMarca=@idMarca, IdCategoria=@idCategoria, Precio=@precio WHERE Id=@id");
                 datos.setearParametro("@codigo", articulo.codigoArticulo);
                 datos.setearParametro("@nombre", articulo.nombre);
                 datos.setearParametro("@descripcion", articulo.descripcion);
@@ -164,16 +168,29 @@ namespace service
                 datos.setearParametro("@precio", articulo.precio);
                 datos.setearParametro("@id", articulo.id);
                 datos.ejecutarAccion();
-
                 datos.cerrarConexion();
+                datos.limpiarParametros();
 
-
-                datos.setearConsulta(
-            "UPDATE IMAGENES SET ImagenUrl = @ImagenUrl WHERE IdArticulo = @IdArticulo;");
+                datos.setearConsulta("DELETE FROM IMAGENES WHERE IdArticulo = @IdArticulo");
                 datos.setearParametro("@IdArticulo", articulo.id);
-                datos.setearParametro("@ImagenUrl", articulo.Imagen.URL);
                 datos.ejecutarAccion();
+                datos.cerrarConexion();
+                datos.limpiarParametros(); 
 
+                if (articulo.URLImagenes != null && articulo.URLImagenes.Count > 0)
+                {
+                    foreach (var img in articulo.URLImagenes)
+                    {
+                        if (string.IsNullOrWhiteSpace(img.URL)) continue;
+
+                        datos.setearConsulta("INSERT INTO IMAGENES (IdArticulo, ImagenUrl) VALUES (@IdArticulo, @ImagenUrl)");
+                        datos.setearParametro("@IdArticulo", articulo.id);
+                        datos.setearParametro("@ImagenUrl", img.URL.Trim());
+                        datos.ejecutarAccion();
+                        datos.cerrarConexion();
+                        datos.limpiarParametros();   
+                    }
+                }
             }
             catch (Exception ex)
             {

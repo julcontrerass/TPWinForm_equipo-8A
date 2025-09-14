@@ -91,6 +91,10 @@ namespace service
                 throw ex;
             }
         }
+        public void limpiarParametros()
+        {
+            comando.Parameters.Clear();
+        }
 
 
     }

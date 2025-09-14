@@ -53,15 +53,28 @@ namespace GertorDeArticulosTp1Progra3
                 articulo.idCategoria = (int)cbxCategoria.SelectedValue;
                 articulo.Imagen = new Imagen();
                 articulo.Imagen.URL = txbUrlImagen.Text?.Trim();
+                articulo.URLImagenes.Clear();
 
-                //articulo.URLImagen = txbUrlImagen.Text;
+
+                foreach (ListViewItem item in lwImagenes.Items)
+                {
+                    var url = item.Text?.Trim();
+                    if (!string.IsNullOrWhiteSpace(url))
+                    {
+                        articulo.URLImagenes.Add(new Imagen
+                        {
+                            URL = url,
+                            IdArticulo = articulo.id
+                        });
+                    }
+                }
 
                 if (articulo.id != 0)
                 {
                     articuloService.modificar(articulo);
                     MessageBox.Show("Modificado exitosamente");
                 }
-                else if(articulo.id == 0)
+                else
                 {
                     articuloService.agregar(articulo);
                     MessageBox.Show("Agregado exitosamente");
@@ -72,46 +85,6 @@ namespace GertorDeArticulosTp1Progra3
             {
                 MessageBox.Show(ex.ToString());
             }
-            /* ArticuloService articuloService = new ArticuloService();
-             try
-             {
-                 if (articulo == null)
-                     articulo = new Articulo();
-
-                 articulo.codigoArticulo = txbCodigoAIngresar.Text;
-                 articulo.nombre = txbNombreAIngresar.Text;
-                 articulo.descripcion = txbDescripcionAIngresar.Text;
-                 articulo.precio = decimal.Parse(txbPrecioAIngresar.Text);
-                 articulo.idMarca = (int)cbxMarca.SelectedValue;
-                 articulo.idCategoria = (int)cbxCategoria.SelectedValue;
-
-                 // Asegurar que Imagen no sea null y setear URL
-                 articulo.Imagen = new Imagen();
-                 articulo.Imagen.URL = txbUrlImagen.Text?.Trim();
-
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show(ex.ToString());
-             }
-             try
-             {
-                 if (articulo.id != 0)
-                 {
-                     articuloService.modificar(articulo);
-                     MessageBox.Show("Modificado exitosamente");
-                 }
-                 else
-                 {
-                     articuloService.agregar(articulo);
-                     MessageBox.Show("Agregado exitosamente");
-                 }
-                 this.Close();
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show(ex.ToString());
-             }*/
         }
 
         private void frmAltaArticulo_Load(object sender, EventArgs e)
@@ -132,19 +105,43 @@ namespace GertorDeArticulosTp1Progra3
 
                 if (articulo != null)
                 {
+                    btnEliminarImagen.Visible = true;
                     lblTituloNuevoArticulo.Text = "Editar articulo";
 
                     txbCodigoAIngresar.Text = articulo.codigoArticulo;
                     txbNombreAIngresar.Text = articulo.nombre;
                     txbDescripcionAIngresar.Text = articulo.descripcion;
                     txbPrecioAIngresar.Text = articulo.precio.ToString();
-                    txbUrlImagen.Text = articulo.Imagen?.URL;
+                    foreach (var img in articulo.URLImagenes)
+                        lwImagenes.Items.Add(img.URL);
+
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            string nuevaImagen = txbUrlImagen.Text;
+            lwImagenes.Items.Add(nuevaImagen);
+            txbUrlImagen.Clear();
+
+        }
+
+        private void btnEliminarImagen_Click(object sender, EventArgs e)
+        {
+            if (lwImagenes.SelectedItems.Count > 0)
+            {
+                lwImagenes.Items.Remove(lwImagenes.SelectedItems[0]);
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una imagen para eliminar.");
+            }
+
         }
     }
 }
