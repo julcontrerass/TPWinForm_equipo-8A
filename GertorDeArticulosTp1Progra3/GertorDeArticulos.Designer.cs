@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pbImagenProducto = new System.Windows.Forms.PictureBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.lblCategoriaFiltro = new System.Windows.Forms.Label();
@@ -64,12 +64,13 @@
             // btnBuscar
             // 
             this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuscar.Location = new System.Drawing.Point(520, 101);
+            this.btnBuscar.Location = new System.Drawing.Point(24, 277);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 26;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // lblCategoriaFiltro
             // 
@@ -104,8 +105,7 @@
             // 
             this.cbFiltroMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFiltroMarca.FormattingEnabled = true;
-            this.cbFiltroMarca.Items.AddRange(new object[] {
-            "Ninguno"});
+            
             this.cbFiltroMarca.Location = new System.Drawing.Point(24, 190);
             this.cbFiltroMarca.Name = "cbFiltroMarca";
             this.cbFiltroMarca.Size = new System.Drawing.Size(121, 21);
@@ -139,6 +139,7 @@
             this.txtbBuscador.Name = "txtbBuscador";
             this.txtbBuscador.Size = new System.Drawing.Size(183, 20);
             this.txtbBuscador.TabIndex = 19;
+            this.txtbBuscador.TextChanged += new System.EventHandler(this.txtbBuscador_TextChanged);
             // 
             // btnEliminar
             // 
@@ -174,8 +175,8 @@
             // 
             this.dgvTablaArticulos.AllowUserToAddRows = false;
             this.dgvTablaArticulos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            this.dgvTablaArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dgvTablaArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTablaArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -209,7 +210,7 @@
             // btnImagenAnterior
             // 
             this.btnImagenAnterior.Location = new System.Drawing.Point(1017, 379);
-            this.btnImagenAnterior.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnImagenAnterior.Margin = new System.Windows.Forms.Padding(2);
             this.btnImagenAnterior.Name = "btnImagenAnterior";
             this.btnImagenAnterior.Size = new System.Drawing.Size(74, 24);
             this.btnImagenAnterior.TabIndex = 28;
@@ -220,7 +221,7 @@
             // btnImagenSiguiente
             // 
             this.btnImagenSiguiente.Location = new System.Drawing.Point(1095, 379);
-            this.btnImagenSiguiente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnImagenSiguiente.Margin = new System.Windows.Forms.Padding(2);
             this.btnImagenSiguiente.Name = "btnImagenSiguiente";
             this.btnImagenSiguiente.Size = new System.Drawing.Size(74, 24);
             this.btnImagenSiguiente.TabIndex = 29;
