@@ -11,15 +11,14 @@ namespace service
 {
     public class ArticuloService
     {
-        public List<Articulo> lista = new List<Articulo>();
-        public List<Articulo> Listar()
+        public List<Articulo> Listar() 
         {
             AccesoDatos datos = new AccesoDatos();
+            List<Articulo> lista = new List<Articulo>();
 
             try
             {
 
-                //datos.setearConsulta("select A.id idArticulo, A.Codigo, A.Nombre, A.descripcion descArticulo, A.Precio, A.IdMarca, A.IdCategoria, M.Id codigoMarca, M.Descripcion descMarca, C.Id codigoCategoria, C.Descripcion descCategoria,(select top 1 I.ImagenUrl FROM IMAGENES I WHERE A.Id = I.IdArticulo) AS URLImagen from ARTICULOS A, MARCAS M, CATEGORIAS C where M.id = A.idMarca and C.id = A.IdCategoria");
                 datos.setearConsulta("select A.id idArticulo,A.Codigo,A.Nombre,A.descripcion descArticulo,A.Precio,A.IdMarca,A.IdCategoria,M.Id codigoMarca,M.Descripcion descMarca,C.Id codigoCategoria,C.Descripcion descCategoria,I.ImagenUrl URLImagen, I.Id idImagen from ARTICULOS A, MARCAS M, CATEGORIAS C, IMAGENES I where M.id = A.idMarca and C.id = A.IdCategoria and A.Id = I.IdArticulo");
                 datos.ejecutarLectura();
 
@@ -200,6 +199,104 @@ namespace service
             {
                 datos.cerrarConexion();
             }
+        }
+        public List<Articulo> filtroAvanzado(string marca, string categoria)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            List<Articulo> listaFiltrada = new List<Articulo>();
+
+            bool hayFiltroMarca = marca != "";
+            bool hayFiltroCategoria = categoria != "";
+            string consulta; 
+
+            if(hayFiltroMarca && hayFiltroCategoria)
+            {
+                consulta = "select A.id idArticulo, A.Codigo, A.Nombre, A.descripcion descArticulo, A.Precio, A.IdMarca, A.IdCategoria, M.Id codigoMarca, M.Descripcion descMarca, C.Id codigoCategoria, C.Descripcion descCategoria,I.ImagenUrl URLImagen, I.Id idImagen from ARTICULOS A, MARCAS M, CATEGORIAS C, IMAGENES I where M.id = A.idMarca and C.id = A.IdCategoria and A.Id = I.IdArticulo and C.Descripcion = @categoria and M.Descripcion= @marca";
+
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@categoria", categoria);
+                datos.setearParametro("@marca", marca);
+            }
+            else if (hayFiltroMarca)
+            {
+                consulta = "select A.id idArticulo, A.Codigo, A.Nombre, A.descripcion descArticulo, A.Precio, A.IdMarca, A.IdCategoria, M.Id codigoMarca, M.Descripcion descMarca, C.Id codigoCategoria, C.Descripcion descCategoria,I.ImagenUrl URLImagen, I.Id idImagen from ARTICULOS A, MARCAS M, CATEGORIAS C, IMAGENES I where M.id = A.idMarca and C.id = A.IdCategoria and A.Id = I.IdArticulo and M.Descripcion = @marca";
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@marca", marca);
+
+            }
+            else
+            {
+                consulta = "select A.id idArticulo, A.Codigo, A.Nombre, A.descripcion descArticulo, A.Precio, A.IdMarca, A.IdCategoria, M.Id codigoMarca, M.Descripcion descMarca, C.Id codigoCategoria, C.Descripcion descCategoria,I.ImagenUrl URLImagen, I.Id idImagen from ARTICULOS A, MARCAS M, CATEGORIAS C, IMAGENES I where M.id = A.idMarca and C.id = A.IdCategoria and A.Id = I.IdArticulo and C.Descripcion = @categoria";
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@categoria", categoria);
+
+            }
+
+
+            try
+                {
+
+                    datos.ejecutarLectura();
+
+                    int? prodAnterior = null;
+
+
+                    while (datos.Lector.Read())
+                    {
+
+                        int idProductoActual = (int)datos.Lector["idArticulo"];
+                        string URL = (string)datos.Lector["URLImagen"];
+                        int idImagen = (int)datos.Lector["idImagen"];
+
+                        if (idProductoActual == prodAnterior)
+                        {
+                            Imagen imagen = new Imagen();
+                            imagen.IdImagen = idImagen;
+                            imagen.URL = URL;
+                            imagen.IdArticulo = idProductoActual;
+                            listaFiltrada.Last().URLImagenes.Add(imagen);
+                        }
+                        else
+                        {
+                            //Articulo:
+                            Articulo aux = new Articulo();
+                            aux.id = idProductoActual;
+                            aux.codigoArticulo = (string)datos.Lector["Codigo"];
+                            aux.nombre = (string)datos.Lector["Nombre"];
+                            aux.descripcion = (string)datos.Lector["descArticulo"];
+                            aux.idMarca = (int)datos.Lector["idMarca"];
+                            aux.idCategoria = (int)datos.Lector["idCategoria"];
+                            aux.precio = (decimal)datos.Lector["Precio"];
+                            //Imagen:
+                            Imagen imagen = new Imagen();
+                            imagen.IdImagen = idImagen;
+                            imagen.URL = URL;
+                            imagen.IdArticulo = idProductoActual;
+                            aux.URLImagenes.Add(imagen);
+                            //Marca:
+                            aux.Marca = new Marca();
+                            aux.Marca.id = (int)datos.Lector["codigoMarca"];
+                            aux.Marca.descripcion = (string)datos.Lector["descMarca"];
+                            //Categoria:
+                            aux.Categoria = new Categoria();
+                            aux.Categoria.id = (int)datos.Lector["codigoCategoria"];
+                            aux.Categoria.descripcion = (string)datos.Lector["descCategoria"];
+                            listaFiltrada.Add(aux);
+                        }
+                        prodAnterior = idProductoActual;
+                    }
+
+                    return listaFiltrada;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    datos.cerrarConexion();
+                }
         }
 
     }

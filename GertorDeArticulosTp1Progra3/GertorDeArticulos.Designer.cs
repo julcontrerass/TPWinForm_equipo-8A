@@ -67,14 +67,22 @@ namespace GertorDeArticulosTp1Progra3
             // btnBuscar
             // 
             this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuscar.Location = new System.Drawing.Point(780, 155);
+
+            this.btnBuscar.Location = new System.Drawing.Point(24, 277);
+
+            
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(112, 35);
             this.btnBuscar.TabIndex = 26;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+
 //            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+
             // 
             // lblCategoriaFiltro
             // 
@@ -112,10 +120,13 @@ namespace GertorDeArticulosTp1Progra3
             // 
             this.cbFiltroMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFiltroMarca.FormattingEnabled = true;
-            this.cbFiltroMarca.Items.AddRange(new object[] {
-            "Ninguno"});
-            this.cbFiltroMarca.Location = new System.Drawing.Point(36, 292);
+
+            
+            this.cbFiltroMarca.Location = new System.Drawing.Point(24, 190);
+
+            
             this.cbFiltroMarca.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
             this.cbFiltroMarca.Name = "cbFiltroMarca";
             this.cbFiltroMarca.Size = new System.Drawing.Size(180, 28);
             this.cbFiltroMarca.TabIndex = 22;
@@ -151,6 +162,7 @@ namespace GertorDeArticulosTp1Progra3
             this.txtbBuscador.Name = "txtbBuscador";
             this.txtbBuscador.Size = new System.Drawing.Size(272, 26);
             this.txtbBuscador.TabIndex = 19;
+            this.txtbBuscador.TextChanged += new System.EventHandler(this.txtbBuscador_TextChanged);
             // 
             // btnEliminar
             // 
@@ -225,8 +237,13 @@ namespace GertorDeArticulosTp1Progra3
             // 
             // btnImagenAnterior
             // 
-            this.btnImagenAnterior.Location = new System.Drawing.Point(1444, 572);
-            this.btnImagenAnterior.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
+            this.btnImagenAnterior.Location = new System.Drawing.Point(1017, 379);
+            this.btnImagenAnterior.Margin = new System.Windows.Forms.Padding(2);
+
+           // this.btnImagenAnterior.Location = new System.Drawing.Point(1444, 572);
+            //this.btnImagenAnterior.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
             this.btnImagenAnterior.Name = "btnImagenAnterior";
             this.btnImagenAnterior.Size = new System.Drawing.Size(111, 37);
             this.btnImagenAnterior.TabIndex = 28;
@@ -236,8 +253,13 @@ namespace GertorDeArticulosTp1Progra3
             // 
             // btnImagenSiguiente
             // 
-            this.btnImagenSiguiente.Location = new System.Drawing.Point(1581, 572);
-            this.btnImagenSiguiente.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
+            this.btnImagenSiguiente.Location = new System.Drawing.Point(1095, 379);
+            this.btnImagenSiguiente.Margin = new System.Windows.Forms.Padding(2);
+
+            //this.btnImagenSiguiente.Location = new System.Drawing.Point(1581, 572);
+            //this.btnImagenSiguiente.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
             this.btnImagenSiguiente.Name = "btnImagenSiguiente";
             this.btnImagenSiguiente.Size = new System.Drawing.Size(111, 37);
             this.btnImagenSiguiente.TabIndex = 29;
