@@ -133,8 +133,11 @@ namespace service
                 datos.setearConsulta("delete from ARTICULOS where Id = @Id");
                 datos.setearParametro("@Id", id);
                 datos.ejecutarAccion();
+                datos.cerrarConexion();
 
-
+                datos.setearConsulta("delete from Imagenes where IdArticulo = @IdArticulo");
+                datos.setearParametro("@IdArticulo", id);
+                datos.ejecutarAccion();
 
             }
             catch (Exception ex)
