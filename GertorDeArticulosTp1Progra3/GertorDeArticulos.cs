@@ -35,15 +35,7 @@ namespace GertorDeArticulosTp1Progra3
            mostrarUOcultarImagenYSelector(listaArticulos);
             dgvTablaArticulos.DataSource = listaArticulos;
             ArticuloActual = listaArticulos[0];
-            FormatearYOcultarColumnas();
-
-        
-            //ArticuloService service = new ArticuloService();
-            //dgvTablaArticulos.DataSource = service.Listar();
-            //ArticuloActual = service.lista[0];
-            //dgvTablaArticulos.Columns["idCategoria"].Visible = false;
-            //dgvTablaArticulos.Columns["idMarca"].Visible = false;
-           // dgvTablaArticulos.Columns["imagen"].Visible = false;
+            FormatearYOcultarColumnas();              
 
             indexImagenActual = 0;
             labelimagenActual.Text = "Imagen " + (indexImagenActual + 1).ToString() + " de " + ArticuloActual.URLImagenes.Count.ToString();
@@ -136,6 +128,7 @@ namespace GertorDeArticulosTp1Progra3
             dgvTablaArticulos.Columns["idCategoria"].Visible = false;
             dgvTablaArticulos.Columns["idMarca"].Visible = false;
             dgvTablaArticulos.Columns["precio"].DefaultCellStyle.Format = "C2";
+            dgvTablaArticulos.Columns["imagen"].Visible = false;
 
         }
 
@@ -311,29 +304,15 @@ namespace GertorDeArticulosTp1Progra3
         {
             frmModificarMarcasyCategorias frmModificarMarcasyCategorias = new frmModificarMarcasyCategorias("Marca");
             frmModificarMarcasyCategorias.ShowDialog();
+            cargarTabla();
         }
 
         private void btnModCategoria_Click(object sender, EventArgs e)
         {
             frmModificarMarcasyCategorias frmModificarMarcasyCategorias = new frmModificarMarcasyCategorias("Categoria");
             frmModificarMarcasyCategorias.ShowDialog();
+            cargarTabla();
         }
-
-        /*private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            List<Articulo> listaFiltrada;
-
-            if(txtbBuscador.Text != "")
-            {
-                listaFiltrada = listaArticulos.FindAll(x => x.Nombre == txtbBuscador.Text);
-            }else
-            {
-                listaFiltrada = listaArticulos;
-            }
-
-            dgvTablaArticulos.DataSource = null;
-            dgvTablaArticulos.DataSource = listaFiltrada;
-        }*/
 
     }
 }

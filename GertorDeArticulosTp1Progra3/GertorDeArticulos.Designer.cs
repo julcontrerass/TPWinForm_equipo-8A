@@ -28,7 +28,7 @@ namespace GertorDeArticulosTp1Progra3
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pbImagenProducto = new System.Windows.Forms.PictureBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.lblCategoriaFiltro = new System.Windows.Forms.Label();
@@ -176,8 +176,8 @@ namespace GertorDeArticulosTp1Progra3
             // 
             this.dgvTablaArticulos.AllowUserToAddRows = false;
             this.dgvTablaArticulos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvTablaArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            this.dgvTablaArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvTablaArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -241,7 +241,7 @@ namespace GertorDeArticulosTp1Progra3
             // 
             // btnModCategoria
             // 
-            this.btnModCategoria.Location = new System.Drawing.Point(24, 361);
+            this.btnModCategoria.Location = new System.Drawing.Point(24, 374);
             this.btnModCategoria.Name = "btnModCategoria";
             this.btnModCategoria.Size = new System.Drawing.Size(121, 23);
             this.btnModCategoria.TabIndex = 32;
@@ -251,7 +251,7 @@ namespace GertorDeArticulosTp1Progra3
             // 
             // btnModMarcas
             // 
-            this.btnModMarcas.Location = new System.Drawing.Point(24, 318);
+            this.btnModMarcas.Location = new System.Drawing.Point(24, 331);
             this.btnModMarcas.Name = "btnModMarcas";
             this.btnModMarcas.Size = new System.Drawing.Size(121, 23);
             this.btnModMarcas.TabIndex = 31;
