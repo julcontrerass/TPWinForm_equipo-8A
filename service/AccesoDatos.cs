@@ -23,6 +23,9 @@ namespace service
             conexion = new SqlConnection("server=.\\SQLEXPRESS; database= CATALOGO_P3_DB; integrated security = true");
             //Conexion Ale al contenedor de Docker:
             //conexion = new SqlConnection("server=192.168.1.17,1433; database= CATALOGO_P3_DB;User Id=SA;Password=m^@DfCT8&Y");
+
+            //conexion = new SqlConnection("server=10.66.149.202,1433; database= CATALOGO_P3_DB;User Id=SA;Password=m^@DfCT8&Y");
+
             comando = new SqlCommand();
         }
 

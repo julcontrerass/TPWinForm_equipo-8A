@@ -19,50 +19,68 @@ namespace service
             try
             {
 
-               //datos.setearConsulta("select ART.Id, ART.Codigo, ART.Nombre, ART.Descripcion, ART.IdMarca, ART.IdCategoria, ART.Precio,(SELECT TOP 1 IMG.ImagenUrl FROM IMAGENES AS IMG WHERE ART.Id = IMG.IdArticulo) AS ImagenUrl FROM ARTICULOS as ART");
-               //select ART.Id, ART.Codigo, ART.Nombre, ART.Descripcion, ART.IdMarca, ART.IdCategoria, ART.Precio,(SELECT TOP 1 IMG.ImagenUrl FROM IMAGENES AS IMG WHERE ART.Id = IMG.IdArticulo) AS ImagenUrlFROM ARTICULOS as ART
-               datos.setearConsulta("select A.id idArticulo, A.Codigo, A.Nombre, A.descripcion descArticulo, A.Precio, A.IdMarca, A.IdCategoria, M.Id codigoMarca, M.Descripcion descMarca, C.Id codigoCategoria, C.Descripcion descCategoria,(select top 1 I.ImagenUrl FROM IMAGENES I WHERE A.Id = I.IdArticulo) AS URLImagen from ARTICULOS A, MARCAS M, CATEGORIAS C where M.id = A.idMarca and C.id = A.IdCategoria");
-             
+                //datos.setearConsulta("select A.id idArticulo, A.Codigo, A.Nombre, A.descripcion descArticulo, A.Precio, A.IdMarca, A.IdCategoria, M.Id codigoMarca, M.Descripcion descMarca, C.Id codigoCategoria, C.Descripcion descCategoria,(select top 1 I.ImagenUrl FROM IMAGENES I WHERE A.Id = I.IdArticulo) AS URLImagen from ARTICULOS A, MARCAS M, CATEGORIAS C where M.id = A.idMarca and C.id = A.IdCategoria");
+                datos.setearConsulta("select A.id idArticulo,A.Codigo,A.Nombre,A.descripcion descArticulo,A.Precio,A.IdMarca,A.IdCategoria,M.Id codigoMarca,M.Descripcion descMarca,C.Id codigoCategoria,C.Descripcion descCategoria,I.ImagenUrl URLImagen, I.Id idImagen from ARTICULOS A, MARCAS M, CATEGORIAS C, IMAGENES I where M.id = A.idMarca and C.id = A.IdCategoria and A.Id = I.IdArticulo");
                 datos.ejecutarLectura();
 
+                int? prodAnterior = null;
 
 
                 while (datos.Lector.Read())
-                {
-                    Articulo aux = new Articulo();
-                    aux.id = (int)datos.Lector["idArticulo"];
-                    aux.codigoArticulo = (string)datos.Lector["Codigo"];
-                    aux.nombre = (string)datos.Lector["Nombre"];
-                    aux.descripcion = (string)datos.Lector["descArticulo"];
-                    aux.idMarca = (int)datos.Lector["idMarca"];
-                    aux.idCategoria = (int)datos.Lector["idCategoria"];
-                    aux.precio = (decimal)datos.Lector["Precio"];
-                    aux.URLImagen = (string)datos.Lector["URLImagen"];
-                    aux.Marca = new Marca();
-                    aux.Marca.id = (int)datos.Lector["codigoMarca"];
-                    aux.Marca.descripcion = (string)datos.Lector["descMarca"];
-                    aux.Categoria = new Categoria();
-                    aux.Categoria.id = (int)datos.Lector["codigoCategoria"];
-                    aux.Categoria.descripcion = (string)datos.Lector["descCategoria"];
-                    lista.Add(aux);
+                { 
+
+                    int idProductoActual = (int)datos.Lector["idArticulo"];
+                    string URL = (string)datos.Lector["URLImagen"];
+                    int idImagen = (int)datos.Lector["idImagen"];
+
+                    if (idProductoActual == prodAnterior)
+                    {
+                        Imagen imagen = new Imagen();
+                        imagen.IdImagen = idImagen;
+                        imagen.URL = URL;
+                        imagen.IdArticulo = idProductoActual;
+                        lista.Last().URLImagenes.Add(imagen);                        
+                    }
+                    else
+                    {
+                        //Articulo:
+                        Articulo aux = new Articulo();
+                        aux.id = idProductoActual;
+                        aux.codigoArticulo = (string)datos.Lector["Codigo"];
+                        aux.nombre = (string)datos.Lector["Nombre"];
+                        aux.descripcion = (string)datos.Lector["descArticulo"];
+                        aux.idMarca = (int)datos.Lector["idMarca"];
+                        aux.idCategoria = (int)datos.Lector["idCategoria"];
+                        aux.precio = (decimal)datos.Lector["Precio"];
+                        //Imagen:
+                        Imagen imagen = new Imagen();
+                        imagen.IdImagen = idImagen;
+                        imagen.URL = URL;
+                        imagen.IdArticulo = idProductoActual;
+                        aux.URLImagenes.Add(imagen);
+                        //Marca:
+                        aux.Marca = new Marca();
+                        aux.Marca.id = (int)datos.Lector["codigoMarca"];
+                        aux.Marca.descripcion = (string)datos.Lector["descMarca"];
+                        //Categoria:
+                        aux.Categoria = new Categoria();
+                        aux.Categoria.id = (int)datos.Lector["codigoCategoria"];
+                        aux.Categoria.descripcion = (string)datos.Lector["descCategoria"];
+                        lista.Add(aux);
+                    }
+                    prodAnterior = idProductoActual;                    
                 }
 
                 return lista;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                throw ex;
             }
             finally
             {
                 datos.cerrarConexion();
             }
-        }
-
-        public void CargarImagen(string url)
-        {
-
         }
 
         /*public List<Articulo> listar()
