@@ -27,6 +27,7 @@ namespace GertorDeArticulosTp1Progra3
         {
             InitializeComponent();
             this.articulo = articulo;
+            Text = "Editar artículo";
         }
 
 

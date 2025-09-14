@@ -163,8 +163,15 @@ namespace GertorDeArticulosTp1Progra3
         private void btnEditar_Click(object sender, EventArgs e)
         {
             Articulo seleccionado;
-
-
+            if (dgvTablaArticulos.CurrentRow == null)
+            {
+                MessageBox.Show("No hay ningún artículo seleccionado");
+                return;
+            }
+            seleccionado = (Articulo)dgvTablaArticulos.CurrentRow.DataBoundItem;
+            frmAltaArticulo modificar = new frmAltaArticulo(seleccionado);
+            modificar.ShowDialog();
+            cargarTabla();
         }
 
         private void btnModMarcas_Click(object sender, EventArgs e)
@@ -178,6 +185,22 @@ namespace GertorDeArticulosTp1Progra3
             frmModificarMarcasyCategorias frmModificarMarcasyCategorias = new frmModificarMarcasyCategorias("Categoria");
             frmModificarMarcasyCategorias.ShowDialog();
         }
+
+        /*private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada;
+
+            if(txtbBuscador.Text != "")
+            {
+                listaFiltrada = listaArticulos.FindAll(x => x.Nombre == txtbBuscador.Text);
+            }else
+            {
+                listaFiltrada = listaArticulos;
+            }
+
+            dgvTablaArticulos.DataSource = null;
+            dgvTablaArticulos.DataSource = listaFiltrada;
+        }*/
     }
 }
 
