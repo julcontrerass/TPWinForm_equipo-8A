@@ -164,6 +164,16 @@ namespace service
                 datos.setearParametro("@precio", articulo.precio);
                 datos.setearParametro("@id", articulo.id);
                 datos.ejecutarAccion();
+
+                datos.cerrarConexion();
+
+
+                datos.setearConsulta(
+            "UPDATE IMAGENES SET ImagenUrl = @ImagenUrl WHERE IdArticulo = @IdArticulo;");
+                datos.setearParametro("@IdArticulo", articulo.id);
+                datos.setearParametro("@ImagenUrl", articulo.Imagen.URL);
+                datos.ejecutarAccion();
+
             }
             catch (Exception ex)
             {

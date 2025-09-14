@@ -51,24 +51,17 @@ namespace GertorDeArticulosTp1Progra3
                 articulo.precio = decimal.Parse(txbPrecioAIngresar.Text);
                 articulo.idMarca = (int)cbxMarca.SelectedValue;
                 articulo.idCategoria = (int)cbxCategoria.SelectedValue;
-
-                // Asegurar que Imagen no sea null y setear URL
                 articulo.Imagen = new Imagen();
                 articulo.Imagen.URL = txbUrlImagen.Text?.Trim();
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            try
-            {
+                //articulo.URLImagen = txbUrlImagen.Text;
+
                 if (articulo.id != 0)
                 {
                     articuloService.modificar(articulo);
                     MessageBox.Show("Modificado exitosamente");
                 }
-                else
+                else if(articulo.id == 0)
                 {
                     articuloService.agregar(articulo);
                     MessageBox.Show("Agregado exitosamente");
@@ -79,6 +72,46 @@ namespace GertorDeArticulosTp1Progra3
             {
                 MessageBox.Show(ex.ToString());
             }
+            /* ArticuloService articuloService = new ArticuloService();
+             try
+             {
+                 if (articulo == null)
+                     articulo = new Articulo();
+
+                 articulo.codigoArticulo = txbCodigoAIngresar.Text;
+                 articulo.nombre = txbNombreAIngresar.Text;
+                 articulo.descripcion = txbDescripcionAIngresar.Text;
+                 articulo.precio = decimal.Parse(txbPrecioAIngresar.Text);
+                 articulo.idMarca = (int)cbxMarca.SelectedValue;
+                 articulo.idCategoria = (int)cbxCategoria.SelectedValue;
+
+                 // Asegurar que Imagen no sea null y setear URL
+                 articulo.Imagen = new Imagen();
+                 articulo.Imagen.URL = txbUrlImagen.Text?.Trim();
+
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show(ex.ToString());
+             }
+             try
+             {
+                 if (articulo.id != 0)
+                 {
+                     articuloService.modificar(articulo);
+                     MessageBox.Show("Modificado exitosamente");
+                 }
+                 else
+                 {
+                     articuloService.agregar(articulo);
+                     MessageBox.Show("Agregado exitosamente");
+                 }
+                 this.Close();
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show(ex.ToString());
+             }*/
         }
 
         private void frmAltaArticulo_Load(object sender, EventArgs e)
@@ -105,6 +138,7 @@ namespace GertorDeArticulosTp1Progra3
                     txbNombreAIngresar.Text = articulo.nombre;
                     txbDescripcionAIngresar.Text = articulo.descripcion;
                     txbPrecioAIngresar.Text = articulo.precio.ToString();
+                    txbUrlImagen.Text = articulo.Imagen?.URL;
                 }
             }
             catch (Exception ex)
