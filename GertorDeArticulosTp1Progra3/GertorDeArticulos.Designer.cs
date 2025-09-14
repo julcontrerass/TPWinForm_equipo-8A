@@ -46,6 +46,8 @@
             this.btnImagenAnterior = new System.Windows.Forms.Button();
             this.btnImagenSiguiente = new System.Windows.Forms.Button();
             this.labelimagenActual = new System.Windows.Forms.Label();
+            this.btnModCategoria = new System.Windows.Forms.Button();
+            this.btnModMarcas = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagenProducto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTablaArticulos)).BeginInit();
             this.SuspendLayout();
@@ -54,7 +56,7 @@
             // 
             this.pbImagenProducto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbImagenProducto.Location = new System.Drawing.Point(916, 127);
+            this.pbImagenProducto.Location = new System.Drawing.Point(866, 122);
             this.pbImagenProducto.Name = "pbImagenProducto";
             this.pbImagenProducto.Size = new System.Drawing.Size(337, 219);
             this.pbImagenProducto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -142,25 +144,27 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(529, 371);
+            this.btnEliminar.Location = new System.Drawing.Point(637, 349);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 18;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnEditar
             // 
-            this.btnEditar.Location = new System.Drawing.Point(386, 371);
+            this.btnEditar.Location = new System.Drawing.Point(494, 349);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(75, 23);
             this.btnEditar.TabIndex = 17;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(242, 371);
+            this.btnAgregar.Location = new System.Drawing.Point(350, 349);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 16;
@@ -188,7 +192,7 @@
             this.dgvTablaArticulos.ReadOnly = true;
             this.dgvTablaArticulos.RowHeadersWidth = 62;
             this.dgvTablaArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTablaArticulos.Size = new System.Drawing.Size(703, 190);
+            this.dgvTablaArticulos.Size = new System.Drawing.Size(680, 190);
             this.dgvTablaArticulos.TabIndex = 15;
             this.dgvTablaArticulos.SelectionChanged += new System.EventHandler(this.dgvTablaArticulos_SelectionChanged);
             // 
@@ -206,7 +210,7 @@
             // 
             // btnImagenAnterior
             // 
-            this.btnImagenAnterior.Location = new System.Drawing.Point(1002, 371);
+            this.btnImagenAnterior.Location = new System.Drawing.Point(963, 372);
             this.btnImagenAnterior.Name = "btnImagenAnterior";
             this.btnImagenAnterior.Size = new System.Drawing.Size(75, 23);
             this.btnImagenAnterior.TabIndex = 28;
@@ -216,7 +220,7 @@
             // 
             // btnImagenSiguiente
             // 
-            this.btnImagenSiguiente.Location = new System.Drawing.Point(1093, 371);
+            this.btnImagenSiguiente.Location = new System.Drawing.Point(1054, 372);
             this.btnImagenSiguiente.Name = "btnImagenSiguiente";
             this.btnImagenSiguiente.Size = new System.Drawing.Size(75, 23);
             this.btnImagenSiguiente.TabIndex = 29;
@@ -227,17 +231,39 @@
             // labelimagenActual
             // 
             this.labelimagenActual.AutoSize = true;
-            this.labelimagenActual.Location = new System.Drawing.Point(1047, 349);
+            this.labelimagenActual.Location = new System.Drawing.Point(996, 350);
             this.labelimagenActual.Name = "labelimagenActual";
             this.labelimagenActual.Size = new System.Drawing.Size(42, 13);
             this.labelimagenActual.TabIndex = 30;
             this.labelimagenActual.Text = "Imagen";
+            // 
+            // btnModCategoria
+            // 
+            this.btnModCategoria.Location = new System.Drawing.Point(24, 318);
+            this.btnModCategoria.Name = "btnModCategoria";
+            this.btnModCategoria.Size = new System.Drawing.Size(121, 23);
+            this.btnModCategoria.TabIndex = 32;
+            this.btnModCategoria.Text = "Modificar Categorias";
+            this.btnModCategoria.UseVisualStyleBackColor = true;
+            this.btnModCategoria.Click += new System.EventHandler(this.btnModCategoria_Click);
+            // 
+            // btnModMarcas
+            // 
+            this.btnModMarcas.Location = new System.Drawing.Point(24, 275);
+            this.btnModMarcas.Name = "btnModMarcas";
+            this.btnModMarcas.Size = new System.Drawing.Size(121, 23);
+            this.btnModMarcas.TabIndex = 31;
+            this.btnModMarcas.Text = "Modificar marcas";
+            this.btnModMarcas.UseVisualStyleBackColor = true;
+            this.btnModMarcas.Click += new System.EventHandler(this.btnModMarcas_Click);
             // 
             // GertorDeArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1283, 554);
+            this.Controls.Add(this.btnModCategoria);
+            this.Controls.Add(this.btnModMarcas);
             this.Controls.Add(this.labelimagenActual);
             this.Controls.Add(this.btnImagenSiguiente);
             this.Controls.Add(this.btnImagenAnterior);
@@ -286,6 +312,8 @@
         private System.Windows.Forms.Button btnImagenAnterior;
         private System.Windows.Forms.Button btnImagenSiguiente;
         private System.Windows.Forms.Label labelimagenActual;
+        private System.Windows.Forms.Button btnModCategoria;
+        private System.Windows.Forms.Button btnModMarcas;
     }
 }
 

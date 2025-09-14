@@ -9,11 +9,11 @@ namespace dominio
      public class Imagen
     {
         public Imagen() { }
-        public Imagen(string URL, int idArticulo, int idImagen)
+        public Imagen(string url, int idArticulo, int idImagen)
         {
-            URL = URL;
-            IdArticulo = idArticulo;
-            IdImagen = idImagen;
+            this.URL = url;
+            this.IdArticulo = idArticulo;
+            this.IdImagen = idImagen;
         }
 
         public string URL { get; set; }

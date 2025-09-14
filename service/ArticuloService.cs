@@ -83,56 +83,61 @@ namespace service
             }
         }
 
-        /*public List<Articulo> listar()
+        public void agregar(Articulo nuevo)
         {
-            List<Articulo> lista = new List<Articulo>();
-            //SqlConnection conexion = new SqlConnection();
-            //SqlCommand comando = new SqlCommand();
-            SqlDataReader lector;
-
+            var datos = new AccesoDatos();
             try
             {
-                conexion.ConnectionString = "server=.\\SQLEXPRESS; database= CATALOGO_P3_DB; integrated security = true";
-                comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select Id, Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio FROM ARTICULOS;";
-                comando.Connection = conexion;
-                conexion.Open();
-                lector = comando.ExecuteReader();
+                datos.setearConsulta(
+                  "INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) " +
+                  "OUTPUT INSERTED.Id VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio)");
+                datos.setearParametro("@Codigo", nuevo.codigoArticulo);
+                datos.setearParametro("@Nombre", nuevo.nombre);
+                datos.setearParametro("@Descripcion", nuevo.descripcion);
+                datos.setearParametro("@IdMarca", nuevo.idMarca);
+                datos.setearParametro("@IdCategoria", nuevo.idCategoria);
+                datos.setearParametro("@Precio", nuevo.precio);
 
-                while (lector.Read())
+                int nuevoId = (int)datos.ejecutarScalar();
+
+                datos.cerrarConexion();
+
+                if (!string.IsNullOrWhiteSpace(nuevo.Imagen?.URL))
                 {
-                    Articulo aux = new Articulo();
-                    aux.id = lector.GetInt32(0);
-                    aux.codigoArticulo = (string)lector["Codigo"];
-                    aux.nombre = (string)lector["Nombre"];
-                    aux.descripcion = (string)lector["Descripcion"];
-                    aux.marca = (Int32)lector["IDMarca"];
-                    aux.categoria = (Int32)lector["IdCategoria"];
-                    aux.precio = (decimal)lector["Precio"];
-
-                    lista.Add(aux);
+                    var datosImg = new AccesoDatos();
+                    try
+                    {
+                        datosImg.setearConsulta(
+                            "INSERT INTO IMAGENES (IdArticulo, ImagenUrl) VALUES (@IdArticulo, @ImagenUrl)");
+                        datosImg.setearParametro("@IdArticulo", nuevoId);
+                        datosImg.setearParametro("@ImagenUrl", nuevo.Imagen.URL);
+                        datosImg.ejecutarAccion();
+                    }
+                    finally
+                    {
+                        datosImg.cerrarConexion();
+                    }
                 }
-                conexion.Close();
-                return lista;
             }
-            catch (Exception)
+            finally
             {
-                //   MessageBox.Show("Error al listar artículos: " + ex.Message);
+                datos.cerrarConexion();
             }
-            return lista;
+        }
 
-        }*/
-
-        public void agregar(Articulo nuevo)
+        public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                //datos.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio)values(" + nuevo.codigoArticulo + "," + nuevo.nombre + "," + nuevo.descripcion + ", " + nuevo.marca + "," + nuevo.categoria + ", " + nuevo.precio.ToString(System.Globalization.CultureInfo.InvariantCulture) + " )");
-                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES ('"+ nuevo.codigoArticulo + "','"+ nuevo.nombre + "','"+ nuevo.descripcion + "',"+ nuevo.Marca + ","+ nuevo.Categoria + ","+ nuevo.precio.ToString(System.Globalization.CultureInfo.InvariantCulture) + ")");
-                datos.ejecutarAccion();          
+                datos.setearConsulta("delete from ARTICULOS where Id = @Id");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+
+
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -141,5 +146,31 @@ namespace service
                 datos.cerrarConexion();
             }
         }
+
+        public void modificar(Articulo articulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, IdMarca = @idMarca, IdCategoria = @idCategoria, Precio = @precio where id = @id");
+                datos.setearParametro("@codigo", articulo.codigoArticulo);
+                datos.setearParametro("@nombre", articulo.nombre);
+                datos.setearParametro("@descripcion", articulo.descripcion);
+                datos.setearParametro("@idMarca", articulo.idMarca);
+                datos.setearParametro("@idCategoria", articulo.idCategoria);
+                datos.setearParametro("@precio", articulo.precio);
+                datos.setearParametro("@id", articulo.id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

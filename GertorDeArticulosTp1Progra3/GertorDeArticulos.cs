@@ -29,6 +29,7 @@ namespace GertorDeArticulosTp1Progra3
             ArticuloActual = service.lista[0];
             dgvTablaArticulos.Columns["idCategoria"].Visible = false;
             dgvTablaArticulos.Columns["idMarca"].Visible = false;
+            dgvTablaArticulos.Columns["imagen"].Visible = false;
             indexImagenActual = 0;
             labelimagenActual.Text = "Imagen " + (indexImagenActual+ 1).ToString() + " de " + ArticuloActual.URLImagenes.Count.ToString();
             cargarImagen(indexImagenActual);
@@ -100,6 +101,7 @@ namespace GertorDeArticulosTp1Progra3
         {
             frmAltaArticulo alta = new frmAltaArticulo();
             alta.ShowDialog();
+            cargarTabla();
 
         }
         private void GertorDeArticulos_Load(object sender, EventArgs e)
@@ -133,6 +135,49 @@ namespace GertorDeArticulosTp1Progra3
             cambiarImagen(-1);
         }
 
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ArticuloService articuloService = new ArticuloService();
+            Articulo seleccionado;
+            try
+            {
+                DialogResult resultado = MessageBox.Show("¿Seguro que desea eliminar el artículo?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (resultado == DialogResult.Yes)
+                {
+                    seleccionado = (Articulo)dgvTablaArticulos.CurrentRow.DataBoundItem;
+                    articuloService.eliminar(seleccionado.id);
+                    MessageBox.Show("Artículo eliminado");
+                }
+                cargarTabla();
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado;
+            seleccionado = (Articulo)dgvTablaArticulos.CurrentRow.DataBoundItem;
+            frmAltaArticulo modificar = new frmAltaArticulo(seleccionado);
+            modificar.ShowDialog();
+            cargarTabla();
+
+        }
+
+        private void btnModMarcas_Click(object sender, EventArgs e)
+        {
+            frmModificarMarcasyCategorias frmModificarMarcasyCategorias = new frmModificarMarcasyCategorias("Marca");
+            frmModificarMarcasyCategorias.ShowDialog();
+        }
+
+        private void btnModCategoria_Click(object sender, EventArgs e)
+        {
+            frmModificarMarcasyCategorias frmModificarMarcasyCategorias = new frmModificarMarcasyCategorias("Categoria");
+            frmModificarMarcasyCategorias.ShowDialog();
+        }
     }
 }
