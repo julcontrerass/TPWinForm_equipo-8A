@@ -19,7 +19,7 @@ namespace service
             try
             {
 
-                datos.setearConsulta("select A.id idArticulo,A.Codigo,A.Nombre,A.descripcion descArticulo,A.Precio,A.IdMarca,A.IdCategoria,M.Id codigoMarca,M.Descripcion descMarca,C.Id codigoCategoria,C.Descripcion descCategoria,I.ImagenUrl URLImagen, I.Id idImagen from ARTICULOS A, MARCAS M, CATEGORIAS C, IMAGENES I where M.id = A.idMarca and C.id = A.IdCategoria and A.Id = I.IdArticulo");
+                datos.setearConsulta("SELECT  A.id AS idArticulo, A.Codigo, A.Nombre, A.descripcion AS descArticulo, A.Precio, A.IdMarca, A.IdCategoria,M.Id AS codigoMarca, M.Descripcion AS descMarca,C.Id AS codigoCategoria, C.Descripcion AS descCategoria, ISNULL(I.ImagenUrl, '') AS URLImagen,ISNULL(I.Id, 0) AS idImagen FROM ARTICULOS A INNER JOIN MARCAS M ON M.id = A.idMarca INNER JOIN CATEGORIAS C ON C.id = A.IdCategoria LEFT JOIN IMAGENES I ON A.Id = I.IdArticulo;");
                 datos.ejecutarLectura();
 
                 int? prodAnterior = null;
@@ -27,7 +27,7 @@ namespace service
 
                 while (datos.Lector.Read())
                 {
-
+                   
                     int idProductoActual = (int)datos.Lector["idArticulo"];
                     string URL = (string)datos.Lector["URLImagen"];
                     int idImagen = (int)datos.Lector["idImagen"];
@@ -212,7 +212,7 @@ namespace service
 
             if(hayFiltroMarca && hayFiltroCategoria)
             {
-                consulta = "select A.id idArticulo, A.Codigo, A.Nombre, A.descripcion descArticulo, A.Precio, A.IdMarca, A.IdCategoria, M.Id codigoMarca, M.Descripcion descMarca, C.Id codigoCategoria, C.Descripcion descCategoria,I.ImagenUrl URLImagen, I.Id idImagen from ARTICULOS A, MARCAS M, CATEGORIAS C, IMAGENES I where M.id = A.idMarca and C.id = A.IdCategoria and A.Id = I.IdArticulo and C.Descripcion = @categoria and M.Descripcion= @marca";
+                consulta = "SELECT  A.id AS idArticulo, A.Codigo, A.Nombre, A.descripcion AS descArticulo, A.Precio, A.IdMarca, A.IdCategoria,M.Id AS codigoMarca, M.Descripcion AS descMarca,C.Id AS codigoCategoria, C.Descripcion AS descCategoria, ISNULL(I.ImagenUrl, '') AS URLImagen,ISNULL(I.Id, 0) AS idImagen FROM ARTICULOS A INNER JOIN MARCAS M ON M.id = A.idMarca INNER JOIN CATEGORIAS C ON C.id = A.IdCategoria LEFT JOIN IMAGENES I ON A.Id = I.IdArticulo WHERE M.Descripcion = @marca and C.Descripcion = @categoria";
 
                 datos.setearConsulta(consulta);
                 datos.setearParametro("@categoria", categoria);
@@ -220,14 +220,14 @@ namespace service
             }
             else if (hayFiltroMarca)
             {
-                consulta = "select A.id idArticulo, A.Codigo, A.Nombre, A.descripcion descArticulo, A.Precio, A.IdMarca, A.IdCategoria, M.Id codigoMarca, M.Descripcion descMarca, C.Id codigoCategoria, C.Descripcion descCategoria,I.ImagenUrl URLImagen, I.Id idImagen from ARTICULOS A, MARCAS M, CATEGORIAS C, IMAGENES I where M.id = A.idMarca and C.id = A.IdCategoria and A.Id = I.IdArticulo and M.Descripcion = @marca";
+                consulta = "SELECT  A.id AS idArticulo, A.Codigo, A.Nombre, A.descripcion AS descArticulo, A.Precio, A.IdMarca, A.IdCategoria,M.Id AS codigoMarca, M.Descripcion AS descMarca,C.Id AS codigoCategoria, C.Descripcion AS descCategoria, ISNULL(I.ImagenUrl, '') AS URLImagen,ISNULL(I.Id, 0) AS idImagen FROM ARTICULOS A INNER JOIN MARCAS M ON M.id = A.idMarca INNER JOIN CATEGORIAS C ON C.id = A.IdCategoria LEFT JOIN IMAGENES I ON A.Id = I.IdArticulo WHERE M.Descripcion = @marca";
                 datos.setearConsulta(consulta);
                 datos.setearParametro("@marca", marca);
 
             }
             else
             {
-                consulta = "select A.id idArticulo, A.Codigo, A.Nombre, A.descripcion descArticulo, A.Precio, A.IdMarca, A.IdCategoria, M.Id codigoMarca, M.Descripcion descMarca, C.Id codigoCategoria, C.Descripcion descCategoria,I.ImagenUrl URLImagen, I.Id idImagen from ARTICULOS A, MARCAS M, CATEGORIAS C, IMAGENES I where M.id = A.idMarca and C.id = A.IdCategoria and A.Id = I.IdArticulo and C.Descripcion = @categoria";
+                consulta = "SELECT  A.id AS idArticulo, A.Codigo, A.Nombre, A.descripcion AS descArticulo, A.Precio, A.IdMarca, A.IdCategoria,M.Id AS codigoMarca, M.Descripcion AS descMarca,C.Id AS codigoCategoria, C.Descripcion AS descCategoria, ISNULL(I.ImagenUrl, '') AS URLImagen,ISNULL(I.Id, 0) AS idImagen FROM ARTICULOS A INNER JOIN MARCAS M ON M.id = A.idMarca INNER JOIN CATEGORIAS C ON C.id = A.IdCategoria LEFT JOIN IMAGENES I ON A.Id = I.IdArticulo WHERE C.Descripcion = @categoria";
                 datos.setearConsulta(consulta);
                 datos.setearParametro("@categoria", categoria);
 

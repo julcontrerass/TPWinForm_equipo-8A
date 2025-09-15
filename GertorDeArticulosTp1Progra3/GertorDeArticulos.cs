@@ -32,10 +32,9 @@ namespace GertorDeArticulosTp1Progra3
         {            
             listaArticulos = ArticuloService.Listar();
 
-           mostrarUOcultarImagenYSelector(listaArticulos);
             dgvTablaArticulos.DataSource = listaArticulos;
             ArticuloActual = listaArticulos[0];
-            FormatearYOcultarColumnas();              
+            FormatearYOcultarColumnas();        
 
             indexImagenActual = 0;
             labelimagenActual.Text = "Imagen " + (indexImagenActual + 1).ToString() + " de " + ArticuloActual.URLImagenes.Count.ToString();
@@ -84,9 +83,10 @@ namespace GertorDeArticulosTp1Progra3
         }
 
         private void cambiarImagen(int nuevoIndice)
-        {
-
-            int potencialNuevoindex = indexImagenActual + nuevoIndice;
+        {   
+             
+                
+              int potencialNuevoindex = indexImagenActual + nuevoIndice;
 
             if (potencialNuevoindex < 0 || potencialNuevoindex >= ArticuloActual.URLImagenes.Count)
             {
@@ -95,35 +95,36 @@ namespace GertorDeArticulosTp1Progra3
             else
             {
 
-                indexImagenActual = potencialNuevoindex;
-                string imagenBackup = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOZugSlXrDIB3SLtuip9ZDU1iJScEqfby_Q&s";
-                string imagenArticuloActual = ArticuloActual.URLImagenes[indexImagenActual].URL;
+                indexImagenActual = potencialNuevoindex;                
                 labelimagenActual.Text = "Imagen " + (indexImagenActual + 1).ToString() + " de " + ArticuloActual.URLImagenes.Count.ToString();
                 cargarImagen(indexImagenActual);
+                mostrarUOcultarImagenYSelector(listaArticulos, ArticuloActual);
 
             }
 
 
         }
 
-        private void mostrarUOcultarImagenYSelector(List<Articulo> listaArticulos)
+        
+        private void mostrarUOcultarImagenYSelector(List<Articulo> listaArticulos, Articulo articuloSeleccionado)
         {
 
-            if (listaArticulos.Count > 0)
-            {
-                pbImagenProducto.Visible = true;
-                btnImagenAnterior.Visible = true;
-                btnImagenSiguiente.Visible = true;
-                labelimagenActual.Visible = true;
-            }
-            else
+            if(listaArticulos.Count == 0 || articuloSeleccionado.URLImagenes[indexImagenActual].URL == "")
             {
                 pbImagenProducto.Visible = false;
                 btnImagenAnterior.Visible = false;
                 btnImagenSiguiente.Visible = false;
                 labelimagenActual.Visible = false;
-            }
+               
+            }else
+            {
+                pbImagenProducto.Visible = true;
+                btnImagenAnterior.Visible = true;
+                btnImagenSiguiente.Visible = true;
+                labelimagenActual.Visible = true;
+            }           
         }
+
         private void FormatearYOcultarColumnas() {
             dgvTablaArticulos.Columns["idCategoria"].Visible = false;
             dgvTablaArticulos.Columns["idMarca"].Visible = false;
@@ -167,20 +168,15 @@ namespace GertorDeArticulosTp1Progra3
             {
                 dgvTablaArticulos.DataSource = null;
                 dgvTablaArticulos.Rows.Clear();
-                dgvTablaArticulos.DataSource = listaArticulos;
-                FormatearYOcultarColumnas();
-                mostrarUOcultarImagenYSelector(listaArticulos);
+                dgvTablaArticulos.DataSource = listaArticulos;                
                 return;
             }
 
             List<Articulo> listaArticulosFiltrada = ArticuloService.filtroAvanzado(filtroMarca, filtroCategoria);
 
-
             dgvTablaArticulos.DataSource = null;
             dgvTablaArticulos.Rows.Clear();
             dgvTablaArticulos.DataSource = listaArticulosFiltrada;
-            FormatearYOcultarColumnas();
-            mostrarUOcultarImagenYSelector(listaArticulosFiltrada);
         }
           
      
@@ -201,12 +197,11 @@ namespace GertorDeArticulosTp1Progra3
         }
         private void dgvTablaArticulos_SelectionChanged(object sender, EventArgs e)
         {
-
             if (dgvTablaArticulos.CurrentRow == null) return;
             ArticuloActual = ((Articulo)dgvTablaArticulos.CurrentRow.DataBoundItem);
             indexImagenActual = 0;
             cambiarImagen(0);
-
+            FormatearYOcultarColumnas();
         }
         private void btnImagenSiguiente_Click(object sender, EventArgs e)
         {
@@ -240,6 +235,7 @@ namespace GertorDeArticulosTp1Progra3
                     MessageBox.Show("Artículo eliminado");
                 }
                 cargarTabla();
+                eliminarFiltros();
 
             }
             catch (Exception ex)
@@ -262,11 +258,12 @@ namespace GertorDeArticulosTp1Progra3
             frmAltaArticulo modificar = new frmAltaArticulo(seleccionado);
             modificar.ShowDialog();
             cargarTabla();
+            eliminarFiltros();
         }
 
 
         private void txtbBuscador_TextChanged(object sender, EventArgs e)
-        {
+        {            
             //filtrar por nombre o marca
             string busqueda = txtbBuscador.Text;            
             List<Articulo> listaFiltrada;
@@ -277,8 +274,6 @@ namespace GertorDeArticulosTp1Progra3
                     dgvTablaArticulos.DataSource = null;
                     dgvTablaArticulos.Rows.Clear();
                     dgvTablaArticulos.DataSource = listaFiltrada;
-                    FormatearYOcultarColumnas();
-                     mostrarUOcultarImagenYSelector(listaFiltrada);                   
                 }               
             
             else
@@ -286,18 +281,12 @@ namespace GertorDeArticulosTp1Progra3
                 dgvTablaArticulos.DataSource = null;
                 dgvTablaArticulos.Rows.Clear();
                 dgvTablaArticulos.DataSource = listaArticulos;
-                FormatearYOcultarColumnas();
-                mostrarUOcultarImagenYSelector(listaArticulos);
             }
 
 
         }
 
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void btnModMarcas_Click(object sender, EventArgs e)
         {
             frmModificarMarcasyCategorias frmModificarMarcasyCategorias = new frmModificarMarcasyCategorias("Marca");
@@ -312,8 +301,15 @@ namespace GertorDeArticulosTp1Progra3
             frmModificarMarcasyCategorias.ShowDialog();
             cargarTabla();
             CargarCategorias();
+            eliminarFiltros();
         }              
 
+        private void eliminarFiltros()
+        {            
+            cbFiltroMarca.SelectedIndex = 0;
+            cbFiltroCategoria.SelectedIndex = 0;    
+           
+        }
         private void cbFiltroCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             filtrarPorMarcaOCategoria();
