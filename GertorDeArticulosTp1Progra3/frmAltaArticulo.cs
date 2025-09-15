@@ -112,6 +112,8 @@ namespace GertorDeArticulosTp1Progra3
                     txbNombreAIngresar.Text = articulo.nombre;
                     txbDescripcionAIngresar.Text = articulo.descripcion;
                     txbPrecioAIngresar.Text = articulo.precio.ToString();
+                    cbxMarca.SelectedValue = articulo.idMarca;
+                    cbxCategoria.SelectedValue = articulo.idCategoria;
                     foreach (var img in articulo.URLImagenes)
                         lwImagenes.Items.Add(img.URL);
 
