@@ -53,7 +53,7 @@ namespace GertorDeArticulosTp1Progra3
             // 
             // pbImagenProducto
             // 
-            this.pbImagenProducto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.pbImagenProducto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbImagenProducto.Location = new System.Drawing.Point(866, 122);
             this.pbImagenProducto.Name = "pbImagenProducto";
@@ -134,6 +134,7 @@ namespace GertorDeArticulosTp1Progra3
             // 
             // btnEliminar
             // 
+            this.btnEliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEliminar.Location = new System.Drawing.Point(637, 349);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
@@ -144,6 +145,7 @@ namespace GertorDeArticulosTp1Progra3
             // 
             // btnEditar
             // 
+            this.btnEditar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEditar.Location = new System.Drawing.Point(494, 349);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(75, 23);
@@ -154,6 +156,7 @@ namespace GertorDeArticulosTp1Progra3
             // 
             // btnAgregar
             // 
+            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAgregar.Location = new System.Drawing.Point(350, 349);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
@@ -177,6 +180,7 @@ namespace GertorDeArticulosTp1Progra3
             this.dgvTablaArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTablaArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvTablaArticulos.Location = new System.Drawing.Point(180, 138);
+            this.dgvTablaArticulos.MaximumSize = new System.Drawing.Size(1000, 600);
             this.dgvTablaArticulos.MultiSelect = false;
             this.dgvTablaArticulos.Name = "dgvTablaArticulos";
             this.dgvTablaArticulos.ReadOnly = true;
@@ -200,6 +204,7 @@ namespace GertorDeArticulosTp1Progra3
             // 
             // btnImagenAnterior
             // 
+            this.btnImagenAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImagenAnterior.Location = new System.Drawing.Point(964, 373);
             this.btnImagenAnterior.Margin = new System.Windows.Forms.Padding(1);
             this.btnImagenAnterior.Name = "btnImagenAnterior";
@@ -211,6 +216,7 @@ namespace GertorDeArticulosTp1Progra3
             // 
             // btnImagenSiguiente
             // 
+            this.btnImagenSiguiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImagenSiguiente.Location = new System.Drawing.Point(1040, 373);
             this.btnImagenSiguiente.Margin = new System.Windows.Forms.Padding(1);
             this.btnImagenSiguiente.Name = "btnImagenSiguiente";
@@ -222,6 +228,7 @@ namespace GertorDeArticulosTp1Progra3
             // 
             // labelimagenActual
             // 
+            this.labelimagenActual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelimagenActual.AutoSize = true;
             this.labelimagenActual.Location = new System.Drawing.Point(996, 350);
             this.labelimagenActual.Name = "labelimagenActual";
