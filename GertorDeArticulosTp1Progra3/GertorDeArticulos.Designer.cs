@@ -28,9 +28,8 @@ namespace GertorDeArticulosTp1Progra3
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pbImagenProducto = new System.Windows.Forms.PictureBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.lblCategoriaFiltro = new System.Windows.Forms.Label();
             this.lblMarcaFiltro = new System.Windows.Forms.Label();
             this.cbFiltroCategoria = new System.Windows.Forms.ComboBox();
@@ -63,17 +62,6 @@ namespace GertorDeArticulosTp1Progra3
             this.pbImagenProducto.TabIndex = 27;
             this.pbImagenProducto.TabStop = false;
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuscar.Location = new System.Drawing.Point(24, 280);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscar.TabIndex = 26;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
             // lblCategoriaFiltro
             // 
             this.lblCategoriaFiltro.AutoSize = true;
@@ -102,6 +90,7 @@ namespace GertorDeArticulosTp1Progra3
             this.cbFiltroCategoria.Name = "cbFiltroCategoria";
             this.cbFiltroCategoria.Size = new System.Drawing.Size(121, 21);
             this.cbFiltroCategoria.TabIndex = 23;
+            this.cbFiltroCategoria.SelectedIndexChanged += new System.EventHandler(this.cbFiltroCategoria_SelectedIndexChanged);
             // 
             // cbFiltroMarca
             // 
@@ -111,6 +100,7 @@ namespace GertorDeArticulosTp1Progra3
             this.cbFiltroMarca.Name = "cbFiltroMarca";
             this.cbFiltroMarca.Size = new System.Drawing.Size(121, 21);
             this.cbFiltroMarca.TabIndex = 22;
+            this.cbFiltroMarca.SelectedIndexChanged += new System.EventHandler(this.cbFiltroMarca_SelectedIndexChanged);
             // 
             // lblFiltro
             // 
@@ -176,8 +166,8 @@ namespace GertorDeArticulosTp1Progra3
             // 
             this.dgvTablaArticulos.AllowUserToAddRows = false;
             this.dgvTablaArticulos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            this.dgvTablaArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dgvTablaArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTablaArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -211,7 +201,7 @@ namespace GertorDeArticulosTp1Progra3
             // btnImagenAnterior
             // 
             this.btnImagenAnterior.Location = new System.Drawing.Point(964, 373);
-            this.btnImagenAnterior.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btnImagenAnterior.Margin = new System.Windows.Forms.Padding(1);
             this.btnImagenAnterior.Name = "btnImagenAnterior";
             this.btnImagenAnterior.Size = new System.Drawing.Size(74, 24);
             this.btnImagenAnterior.TabIndex = 28;
@@ -222,7 +212,7 @@ namespace GertorDeArticulosTp1Progra3
             // btnImagenSiguiente
             // 
             this.btnImagenSiguiente.Location = new System.Drawing.Point(1040, 373);
-            this.btnImagenSiguiente.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btnImagenSiguiente.Margin = new System.Windows.Forms.Padding(1);
             this.btnImagenSiguiente.Name = "btnImagenSiguiente";
             this.btnImagenSiguiente.Size = new System.Drawing.Size(74, 24);
             this.btnImagenSiguiente.TabIndex = 29;
@@ -241,7 +231,7 @@ namespace GertorDeArticulosTp1Progra3
             // 
             // btnModCategoria
             // 
-            this.btnModCategoria.Location = new System.Drawing.Point(24, 374);
+            this.btnModCategoria.Location = new System.Drawing.Point(24, 318);
             this.btnModCategoria.Name = "btnModCategoria";
             this.btnModCategoria.Size = new System.Drawing.Size(121, 23);
             this.btnModCategoria.TabIndex = 32;
@@ -251,7 +241,7 @@ namespace GertorDeArticulosTp1Progra3
             // 
             // btnModMarcas
             // 
-            this.btnModMarcas.Location = new System.Drawing.Point(24, 331);
+            this.btnModMarcas.Location = new System.Drawing.Point(24, 275);
             this.btnModMarcas.Name = "btnModMarcas";
             this.btnModMarcas.Size = new System.Drawing.Size(121, 23);
             this.btnModMarcas.TabIndex = 31;
@@ -270,7 +260,6 @@ namespace GertorDeArticulosTp1Progra3
             this.Controls.Add(this.btnImagenSiguiente);
             this.Controls.Add(this.btnImagenAnterior);
             this.Controls.Add(this.pbImagenProducto);
-            this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.lblCategoriaFiltro);
             this.Controls.Add(this.lblMarcaFiltro);
             this.Controls.Add(this.cbFiltroCategoria);
@@ -298,7 +287,6 @@ namespace GertorDeArticulosTp1Progra3
         #endregion
 
         private System.Windows.Forms.PictureBox pbImagenProducto;
-        private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Label lblCategoriaFiltro;
         private System.Windows.Forms.Label lblMarcaFiltro;
         private System.Windows.Forms.ComboBox cbFiltroCategoria;

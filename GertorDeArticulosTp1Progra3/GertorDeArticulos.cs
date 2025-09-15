@@ -127,35 +127,63 @@ namespace GertorDeArticulosTp1Progra3
         private void FormatearYOcultarColumnas() {
             dgvTablaArticulos.Columns["idCategoria"].Visible = false;
             dgvTablaArticulos.Columns["idMarca"].Visible = false;
-            dgvTablaArticulos.Columns["precio"].DefaultCellStyle.Format = "C2";
+            dgvTablaArticulos.Columns["precio"].DefaultCellStyle.Format = "N2";
             dgvTablaArticulos.Columns["imagen"].Visible = false;
 
         }
 
         private void CargarMarcas()
         {
+            cbFiltroMarca.Items.Clear();
             MarcaService marcaService = new MarcaService();
-
             List<Marca> listadoMarcas = marcaService.Listar();
-
             cbFiltroMarca.Items.Add("");
             listadoMarcas.ForEach(marca => cbFiltroMarca.Items.Add(marca.descripcion));
-            
-
-            
         }
-
         private void CargarCategorias()
         {
+            cbFiltroCategoria.Items.Clear();
             CategoriaService categoriaService = new CategoriaService();
-
             List<Categoria> listaCategorias = categoriaService.Listar();
-
             cbFiltroCategoria.Items.Add("");
-
             listaCategorias.ForEach(categoria => cbFiltroCategoria.Items.Add(categoria.descripcion));
         }
+        private void filtrarPorMarcaOCategoria()
+        {           
+            string filtroMarca = "";
+            string filtroCategoria = "";
+            txtbBuscador.Text = "";
+
+            if (cbFiltroMarca.SelectedItem != null)
+            {
+                filtroMarca = cbFiltroMarca.SelectedItem.ToString();
+            }
+            if (cbFiltroCategoria.SelectedItem != null)
+            {
+                filtroCategoria = cbFiltroCategoria.SelectedItem.ToString();
+            }
+
+            if (filtroMarca == "" && filtroCategoria == "")
+            {
+                dgvTablaArticulos.DataSource = null;
+                dgvTablaArticulos.Rows.Clear();
+                dgvTablaArticulos.DataSource = listaArticulos;
+                FormatearYOcultarColumnas();
+                mostrarUOcultarImagenYSelector(listaArticulos);
+                return;
+            }
+
+            List<Articulo> listaArticulosFiltrada = ArticuloService.filtroAvanzado(filtroMarca, filtroCategoria);
+
+
+            dgvTablaArticulos.DataSource = null;
+            dgvTablaArticulos.Rows.Clear();
+            dgvTablaArticulos.DataSource = listaArticulosFiltrada;
+            FormatearYOcultarColumnas();
+            mostrarUOcultarImagenYSelector(listaArticulosFiltrada);
+        }
           
+     
 
         //eventos:
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -267,36 +295,6 @@ namespace GertorDeArticulosTp1Progra3
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            // metodo para busqueda avanzada
-            string filtroMarca = "";
-            string filtroCategoria = "";
-            txtbBuscador.Text = "";
-                
-             if(cbFiltroMarca.SelectedItem != null){
-                filtroMarca = cbFiltroMarca.SelectedItem.ToString();
-             }
-             if (cbFiltroCategoria.SelectedItem != null) {             
-                filtroCategoria = cbFiltroCategoria.SelectedItem.ToString();
-            }
-
-            if(filtroMarca == "" && filtroCategoria == "")
-            {
-                dgvTablaArticulos.DataSource = null;
-                dgvTablaArticulos.Rows.Clear();
-                dgvTablaArticulos.DataSource = listaArticulos;
-                FormatearYOcultarColumnas();
-                mostrarUOcultarImagenYSelector(listaArticulos);
-                return;
-            }
-
-            List<Articulo> listaArticulosFiltrada = ArticuloService.filtroAvanzado(filtroMarca, filtroCategoria);
-                                 
-
-            dgvTablaArticulos.DataSource = null;
-            dgvTablaArticulos.Rows.Clear();
-            dgvTablaArticulos.DataSource = listaArticulosFiltrada;
-            FormatearYOcultarColumnas();
-            mostrarUOcultarImagenYSelector(listaArticulosFiltrada);
 
         }
 
@@ -305,6 +303,7 @@ namespace GertorDeArticulosTp1Progra3
             frmModificarMarcasyCategorias frmModificarMarcasyCategorias = new frmModificarMarcasyCategorias("Marca");
             frmModificarMarcasyCategorias.ShowDialog();
             cargarTabla();
+            CargarMarcas();
         }
 
         private void btnModCategoria_Click(object sender, EventArgs e)
@@ -312,8 +311,18 @@ namespace GertorDeArticulosTp1Progra3
             frmModificarMarcasyCategorias frmModificarMarcasyCategorias = new frmModificarMarcasyCategorias("Categoria");
             frmModificarMarcasyCategorias.ShowDialog();
             cargarTabla();
+            CargarCategorias();
+        }              
+
+        private void cbFiltroCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtrarPorMarcaOCategoria();
         }
 
+        private void cbFiltroMarca_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtrarPorMarcaOCategoria();
+        }
     }
 }
 
